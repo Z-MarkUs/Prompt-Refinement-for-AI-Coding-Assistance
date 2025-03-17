@@ -1,0 +1,781 @@
+1001,Hard,"You are given a grid where each cell can have a lamp. Initially, all lamps are off. Some lamps are turned on, and each lamp lights up its entire row, column, and both diagonals. You are also given a list of queries to check if a specific cell is illuminated. After answering a query, you need to turn off the lamp at that cell (if any) and all its neighboring lamps (those directly beside it or diagonal to it). Return 1 for each query if the cell is illuminated and 0 otherwise.","class Solution:
+    def gridIllumination(self, n: int, lamps: List[List[int]], queries: List[List[int]]) -> List[int]:
+        "
+1002,Easy,"You have a list of words, and your task is to find all the letters that are common across all the words. If a letter appears multiple times in every word, it should appear that many times in the result. For example, if the input is [""bella"", ""label"", ""roller""], the output would be [""e"", ""l"", ""l""], because e appears once in all words and l appears twice. If the input is [""cool"", ""lock"", ""cook""], the output would be [""c"", ""o""], because both c and o are common in all words.","class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        "
+1003,Medium,"You are given a string s, and your task is to determine if it is valid. A string is considered valid if you can start with an empty string t = """" and transform it into s by repeatedly adding the string ""abc"" at any position. For example, you can turn t into ""abc"", ""abcabc"", ""aabcbc"", and so on by adding ""abc"" wherever you want. If it’s possible to create s using this process, return true; otherwise, return false.","class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        "
+1004,Medium,You have a binary array nums (made up of only 0s and 1s) and a number k. Your task is to find the longest sequence of consecutive 1s you can get if you are allowed to flip up to k 0s into 1s.,"class Solution:
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        "
+1005,Easy,You are given an array of integers nums and a number k. Your task is to maximize the sum of the array by flipping the sign of any number in the array (changing it from positive to negative or vice versa) exactly k times. You can flip the same number multiple times if needed.,"class Solution:
+    def largestSumAfterKNegations(self, nums: List[int], k: int) -> int:
+        "
+1006,Medium,"The factorial of a number n is the product of all numbers from n down to 1. But here’s a twist! Instead of just multiplying, you will perform a rotating sequence of operations: multiply '*', divide '/', add '+', and subtract '-'. This new way of calculating the factorial is called the clumsy factorial. I want to fine the clumsy factorial of a number.","class Solution:
+    def clumsy(self, n: int) -> int:
+        "
+1007,Medium,"Imagine you have a row of dominoes. Each domino has a number on its top half (tops) and another number on its bottom half (bottoms). You are allowed to rotate a domino to swap its top and bottom numbers. Your task is to figure out the minimum number of rotations needed to make all the numbers in the top row the same, or all the numbers in the bottom row the same. If it’s not possible, return -1.","class Solution:
+    def minDominoRotations(self, tops: List[int], bottoms: List[int]) -> int:
+        "
+1008,Medium,"You are given an array preorder, which represents the preorder traversal of a binary search tree (BST). Your task is to build the BST from this traversal and return the root of the tree.","# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        "
+1009,Easy,The complement of a number is found by flipping all the 0s to 1s and all the 1s to 0s in its binary form. Your task is to find the complement of a given integer n and return it as a decimal number.,"class Solution:
+    def bitwiseComplement(self, n: int) -> int:
+        "
+1010,Medium,"You are given a list of songs, where each song has a duration in seconds stored in the array time. Your task is to find how many pairs of songs have a total duration that is divisible by 60. In other words, for any two songs, their combined duration should leave a remainder of 0 when divided by 60. Make sure to count only pairs where the first song comes before the second.","class Solution:
+    def numPairsDivisibleBy60(self, time: List[int]) -> int:
+        "
+1011,Medium,"You are given a conveyor belt with packages, where each package has a specific weight stored in the array weights. Your task is to ship all the packages within a given number of days. You must load the ship each day with packages in the same order they appear in the weights array. The ship has a maximum weight capacity, and you can’t exceed that capacity on any day. Your goal is to find the minimum weight capacity of the ship that allows you to ship all the packages within the given number of days","class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        "
+1012,Hard,You are given an integer n. Your task is to find how many positive integers between 1 and n (inclusive) have at least one repeated digit in their decimal representation.,"class Solution:
+    def numDupDigitsAtMostN(self, n: int) -> int:
+        "
+1013,Easy,You are given an array of integers arr. Your task is to check if it’s possible to divide the array into three non-empty parts such that the sum of each part is the same.,"class Solution:
+    def canThreePartsEqualSum(self, arr: List[int]) -> bool:
+        "
+1014,Medium,"You are given an array values, where values[i] represents the score of the ith sightseeing spot. The distance between two sightseeing spots i and j is j - i. The score of a pair of sightseeing spots (i < j) is calculated as:values[i] + values[j] + i - j. Your task is to find the maximum score of any pair of sightseeing spots.","class Solution:
+    def maxScoreSightseeingPair(self, values: List[int]) -> int:
+        "
+1015,Medium,"You are given a positive integer k. Your task is to find the length of the smallest positive integer n such that: n is divisible by k and n only contains the digit 1. If no such number n exists, return -1. Keep in mind that n may not fit in standard data types since it can be very large.","class Solution:
+    def smallestRepunitDivByK(self, k: int) -> int:
+        "
+1016,Medium,You are given a binary string s and a positive integer n. Your task is to check if the binary representation of all integers from 1 to n are substrings of s. A substring is a sequence of characters that appears continuously in the string.,"class Solution:
+    def queryString(self, s: str, n: int) -> bool:
+        "
+1017,Medium,"You are given an integer n. Your task is to convert n into its representation in base -2 and return it as a binary string. The string should not have leading zeros unless the result is ""0"".","class Solution:
+    def baseNeg2(self, n: int) -> str:
+        "
+1018,Easy,"You are given a binary array nums. The binary representation of a number is formed by taking the elements of nums from the start to the i-th index. For each i, compute the number formed this way and check if it is divisible by 5. Your task is to return an array of booleans answer where answer[i] is true if the number formed by nums[0..i] is divisible by 5, and false otherwise.","class Solution:
+    def prefixesDivBy5(self, nums: List[int]) -> List[bool]:
+        "
+1019,Medium,"You are given the head of a linked list with n nodes. For each node in the list, find the value of the next greater node. The next greater node is the first node that comes after the current one and has a strictly larger value. Return an array answer where answer[i] is the value of the next greater node for the i-th node (1-indexed). If there is no such node for the i-th node, set answer[i] = 0.","# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def nextLargerNodes(self, head: Optional[ListNode]) -> List[int]:
+        "
+1020,Medium,"You are given an m x n binary matrix grid, where: 0 represents sea cells and 1 represents land cells. Your task is to find the number of land cells (1) that are completely enclosed by sea cells (0) in the grid. A land cell is considered enclosed if it is impossible to walk from it to the boundary of the grid by only stepping on other land cells (1).","class Solution:
+    def numEnclaves(self, grid: List[List[int]]) -> int:
+        "
+1021,Easy,You are given a valid parentheses string s. Your task is to remove the outermost parentheses from every primitive part of the string and return the resulting string.,"class Solution:
+    def removeOuterParentheses(self, s: str) -> str:
+        "
+1022,Easy,"You are given the root of a binary tree where each node has a value of 0 or 1. Each root-to-leaf path in the tree represents a binary number, with the root being the most significant bit and the leaf being the least significant bit. Your task is to calculate the sum of all the binary numbers represented by the paths from the root to each leaf and return the total sum.","# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
+        "
+1023,Medium,"You are given an array of strings queries and a string pattern. Your task is to check if each string in queries matches the given pattern. A string in queries matches the pattern if you can insert lowercase letters into the pattern to make it equal to the string. You cannot remove or change characters in the pattern. Return a boolean array answer where answer[i] is true if queries[i] matches the pattern, and false otherwise","class Solution:
+    def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
+        "
+1024,Medium,"You are given a list of video clips, where each clip is represented as [start, end]. These clips are segments of a sporting event that lasted time seconds. Your task is to find the minimum number of clips needed to cover the entire event from 0 to time. If it's not possible to cover the entire event, return -1.","class Solution:
+    def videoStitching(self, clips: List[List[int]], time: int) -> int:
+        "
+1025,Easy,"Alice and Bob are playing a game where they take turns, and Alice goes first. The game starts with a number n on the chalkboard. On each turn, the current player: Chooses any x such that 0 < x < n and n % x == 0 (i.e., x is a divisor of n). Replaces n with n - x. If a player cannot make a move, they lose the game. Your task is to determine if Alice will win the game, assuming both players play optimally.","class Solution:
+    def divisorGame(self, n: int) -> bool:
+        "
+1026,Medium,You are given the root of a binary tree. Your task is to find the maximum difference v between the values of two different nodes a and b such that a is an ancestor of b,"# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
+        "
+1027,Medium,You are given an array nums of integers. Your task is to find the length of the longest arithmetic subsequence in the array.,"class Solution:
+    def longestArithSeqLength(self, nums: List[int]) -> int:
+        "
+1028,Hard,You are given the result of a preorder depth-first search (DFS) traversal of a binary tree as a string traversal. Your task is to reconstruct the original binary tree and return its root.,"# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
+        "
+1029,Medium,"A company is planning to interview 2n people and must fly exactly n people to city A and n people to city B. You are given an array costs, where each person i has: aCosti: the cost to fly them to city A, bCosti: the cost to fly them to city B. Your task is to find the minimum total cost to fly all 2n people while ensuring that exactly n people go to each city.","class Solution:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        "
+1030,Easy,"You are given the dimensions of a rows x cols matrix and the coordinates (rCenter, cCenter) of a cell in the matrix. Your task is to return the coordinates of all cells in the matrix, sorted by their distance from (rCenter, cCenter), in ascending order.","class Solution:
+    def allCellsDistOrder(self, rows: int, cols: int, rCenter: int, cCenter: int) -> List[List[int]]:
+        "
+1031,Medium,"You are given an integer array nums and two integers firstLen and secondLen. Your task is to find the maximum sum of two non-overlapping subarrays, where: The first subarray has a length of firstLen. The second subarray has a length of secondLen. The two subarrays must not overlap, and the subarray with length firstLen can appear either before or after the subarray with length secondLen.","class Solution:
+    def maxSumTwoNoOverlap(self, nums: List[int], firstLen: int, secondLen: int) -> int:
+        "
+1032,Hard,"You need to build a class called StreamChecker that helps check if a series of characters matches any word from a list. The class should do the following: Initialize with a list of words. Query one character at a time and check if the current sequence of characters (the ""stream"") ends with any of the words in the list. Return true if a match is found, and false otherwise.","class StreamChecker:
+
+    def __init__(self, words: List[str]):
+
+
+    def query(self, letter: str) -> bool:
+
+
+
+# Your StreamChecker object will be instantiated and called as such:
+# obj = StreamChecker(words)
+# param_1 = obj.query(letter)"
+1033,Medium,"You have three stones on the X-axis at positions a, b, and c. You can move a stone from the smallest or largest position to an unoccupied spot between the other two stones. The goal is to find: The minimum number of moves needed to make the stones consecutive. The maximum number of moves you can make while still ending with the stones in consecutive positions. You need to return an array [minMoves, maxMoves] with the results.","class Solution:
+    def numMovesStones(self, a: int, b: int, c: int) -> List[int]:
+        "
+1034,Medium,"You are given a grid of numbers representing colors and a starting cell at grid[row][col]. A connected component consists of cells with the same color as the starting cell, connected in any of the four directions. The border of this component includes cells that are either adjacent to a different color or are on the grid's edge. Your task is to change the color of all border cells in the connected component to a given new color and return the updated grid.","class Solution:
+    def colorBorder(self, grid: List[List[int]], row: int, col: int, color: int) -> List[List[int]]:
+        "
+1035,Medium,"You are given two arrays, nums1 and nums2, and your task is to find the maximum number of uncrossed lines you can draw between elements of these arrays. A line can only connect nums1[i] and nums2[j] if the values are the same, and no two lines can intersect. Each number can be part of at most one line. Return the maximum number of such lines that can be drawn without intersections.","class Solution:
+    def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
+        "
+1036,Hard,"You are given a large grid and need to determine if it is possible to move from a source square to a target square. You can move north, south, east, or west, but you cannot step into any blocked square or outside the grid. If there are no blocked squares, the target is always reachable. If there are blocked squares, you need to ensure that the source is not completely surrounded by them or that the target is not completely isolated. Return true if you can reach the target, and false otherwise.","class Solution:
+    def isEscapePossible(self, blocked: List[List[int]], source: List[int], target: List[int]) -> bool:
+        "
+1037,Easy,"You are given three points on an X-Y plane, and your task is to determine if they form a boomerang. A boomerang is a set of three points that are: All distinct (no two points are the same). Not in a straight line (they do not lie on the same line).Return true if these conditions are satisfied, and false otherwise.","class Solution:
+    def isBoomerang(self, points: List[List[int]]) -> bool:
+        "
+1038,Medium,"Given the root of a Binary Search Tree (BST), convert it into a Greater Tree where each node's value is updated to the original value plus the sum of all values greater than or equal to that node's value in the BST.","# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def bstToGst(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        "
+1039,Medium,"You are given a convex polygon with n vertices, represented as an array values where each value corresponds to a vertex. The task is to triangulate the polygon into n - 2 triangles, where the score of each triangle is the product of its vertices' values. The total score of the triangulation is the sum of the scores of all triangles. Your goal is to find the triangulation that minimizes the total score and return that minimum score.","class Solution:
+    def minScoreTriangulation(self, values: List[int]) -> int:
+        "
+1040,Medium,"You are given an array stones representing the positions of stones on the X-axis. A stone is an endpoint stone if it is at the smallest or largest position. In one move, you can move an endpoint stone to any unoccupied position such that it is no longer an endpoint. The game ends when the stones form three consecutive positions. Your task is to return an array answer of length 2, where answer[0] is the minimum number of moves needed to finish the game, and answer[1] is the maximum number of moves possible before finishing the game.","class Solution:
+    def numMovesStonesII(self, stones: List[int]) -> List[int]:
+        "
+1041,Medium,"ou are given a string of instructions that a robot follows on an infinite plane, starting at position (0, 0) and facing north. The instructions consist of: ""G"": move forward one unit in the current direction, ""L"": turn 90 degrees to the left, and ""R"": turn 90 degrees to the right. The robot repeats the instructions indefinitely. You need to determine if the robot's path will always remain within a circle","class Solution:
+    def isRobotBounded(self, instructions: str) -> bool:
+        "
+1042,Medium,"You are given n gardens connected by bidirectional paths, and each garden must be planted with one of four flower types such that no two connected gardens share the same flower type. Your task is to determine any valid assignment of flower types to gardens. Return the result as an array answer, where answer[i] represents the flower type assigned to garden i+1","class Solution:
+    def gardenNoAdj(self, n: int, paths: List[List[int]]) -> List[int]:
+        "
+1043,Medium,"You are given an integer array arr and a positive integer k. Your task is to partition the array into contiguous subarrays, each with a maximum length of k. After partitioning, replace all the elements in each subarray with the maximum value of that subarray. Return the largest possible sum of the modified array after partitioning.","class Solution:
+    def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
+        "
+1044,Hard,"You are given a string s, and your task is to find any duplicated substring with the longest possible length. A duplicated substring is a contiguous substring of s that appears two or more times, and occurrences may overlap. If no duplicated substring exists, return an empty string ","class Solution:
+    def longestDupSubstring(self, s: str) -> str:
+        "
+1103,Easy,"Given a number of candies and an integer num_people representing the number of people in a row, distribute the candies in a sequential pattern where the first person gets 1 candy, the second gets 2, and so on, cycling back to the start of the row after reaching the last person, and incrementing the candy count each time, until all candies are distributed, with the final person receiving any remaining candies. Return an array of length num_people representing the final distribution.","class Solution:
+    def distributeCandies(self, candies: int, num_people: int) -> List[int]:
+        "
+1046,Easy,"You are given an array of integers stones, where each element represents the weight of a stone. On each turn, you smash the two heaviest stones together: If the two stones have the same weight, both are destroyed. If they have different weights, the lighter stone is destroyed, and the heavier stone’s weight is reduced by the lighter stone’s weight. The game continues until there is at most one stone left. Your task is to return the weight of the last remaining stone. If no stones are left, return 0.","class Solution:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        "
+1047,Easy,You are given a string s consisting of lowercase English letters. Your task is to repeatedly remove adjacent pairs of equal letters until no more such pairs exist. Return the resulting string after all duplicate removals.,"class Solution:
+    def removeDuplicates(self, s: str) -> str:
+        "
+1048,Medium,"You are given a list of words, and your task is to determine the length of the longest possible word chain that can be formed from the words. A word chain is a sequence of words where each word is the predecessor of the next. A word wordA is a predecessor of wordB if wordB can be formed by inserting exactly one letter into wordA without changing the order of the characters. ","class Solution:
+    def longestStrChain(self, words: List[str]) -> int:
+        "
+1049,Medium,"You are given an array stones, where each element represents the weight of a stone. On each turn, you choose any two stones and smash them together: If the two stones have the same weight, both are destroyed. If the weights are different, the lighter stone is destroyed, and the heavier stone's weight is reduced by the lighter stone's weight. Your task is to determine the smallest possible weight of the remaining stone after all possible smashes. If no stones are left, return 0.","class Solution:
+    def lastStoneWeightII(self, stones: List[int]) -> int:
+        "
+1290,Easy,"You are given the head of a singly-linked list where each node contains a binary digit (0 or 1). The linked list represents the binary representation of a number, with the most significant bit (MSB) at the head of the list. The task is to compute and return the decimal value of the number represented by the linked list.","# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def getDecimalValue(self, head: Optional[ListNode]) -> int:
+        "
+1051,Easy,"You are given two arrays: heights, representing the current order of students in a line, and expected, which represents the students' heights sorted in non-decreasing order. Your task is to count and return the number of indices where the height in heights does not match the corresponding height in expected.","class Solution:
+    def heightChecker(self, heights: List[int]) -> int:
+        "
+1052,Medium,"You are given two arrays, customers and grumpy, and an integer minutes. The customers array represents the number of customers entering the bookstore each minute, and the grumpy array indicates whether the bookstore owner is grumpy (1) or not (0) during each minute. When grumpy, the customers for that minute are unsatisfied. The owner can use a secret technique to stop being grumpy for exactly minutes consecutive minutes, but only once. Your task is to find the maximum number of customers that can be satisfied throughout the day by choosing the best interval to use the technique.","class Solution:
+    def maxSatisfied(self, customers: List[int], grumpy: List[int], minutes: int) -> int:
+        "
+1053,Medium,"You are given an array `arr` of positive integers. Your task is to find the lexicographically largest permutation of the array that is strictly smaller than the original array and can be obtained by performing **exactly one swap** of two elements. If no such permutation exists, return the original array.","class Solution:
+    def prevPermOpt1(self, arr: List[int]) -> List[int]:
+        "
+1054,Medium,"You are given an array barcodes, and your task is to rearrange the elements so that no two adjacent barcodes are the same. Return any valid arrangement that satisfies this condition.","class Solution:
+    def rearrangeBarcodes(self, barcodes: List[int]) -> List[int]:
+        "
+1055,Medium,"You are given two strings, source and target. Your task is to determine the minimum number of subsequences of source required to form the target string. A subsequence of source is formed by deleting some (or no) characters from source without changing the order of the remaining characters.","class Solution:
+    def shortestWay(self, source: str, target: str) -> int:
+        "
+1056,Easy,"You are given an integer n, and your task is to determine if it is a confusing number. A confusing number is a number that, when rotated 180 degrees, becomes a valid number but is different from the original number. The rules for rotating digits are: Valid rotations: 0 → 0, 1 → 1, 6 → 9, 8 → 8, 9 → 6. Invalid digits: 2, 3, 4, 5, 7 (these cannot be part of a confusing number). If all digits are valid, and the rotated number is different from the original, return true. Otherwise, return false.","class Solution:
+    def confusingNumber(self, n: int) -> bool:
+        "
+1057,Medium,"You are given the positions of n workers and m bikes on an X-Y plane, and you need to assign each worker a bike such that the assignment minimizes the Manhattan distance between them. If there are ties in distance, the assignment prioritizes workers with smaller indices, and if there are still ties, it prioritizes bikes with smaller indices. Return an array where each element represents the index of the bike assigned to the corresponding worker.","class Solution:
+    def assignBikes(self, workers: List[List[int]], bikes: List[List[int]]) -> List[int]:
+        "
+1058,Medium,"You are given an array of prices and a target sum. Each price in the array can be rounded either down to its floor value or up to its ceiling value. Your task is to determine whether it's possible to round the prices in such a way that their sum equals the given target. If it's not possible to achieve the target, return `""-1""`.","class Solution:
+    def minimizeError(self, prices: List[str], target: int) -> str:
+        "
+1059,Medium,"You are given a directed graph represented by its edges and two nodes, `source` and `destination`. Your task is to determine if **all paths** starting from the `source` node eventually lead to the `destination` node. ","class Solution:
+    def leadsToDestination(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        "
+1060,Medium,"You are given a sorted array of unique integers, `nums`, and an integer `k`. Your task is to find the `kth` missing number starting from the leftmost element of the array. A missing number is any integer not present in `nums` but lies between the smallest and largest numbers in the range. If `k` exceeds the range of the missing numbers in `nums`, continue counting beyond the largest number in the array.","class Solution:
+    def missingElement(self, nums: List[int], k: int) -> int:
+        "
+1061,Medium,"You are given two strings `s1` and `s2` of equal length that define equivalence relationships between characters, where `s1[i]` is equivalent to `s2[i]`. Using these relationships, you need to transform a given string `baseStr` into its **lexicographically smallest equivalent string** by replacing its characters with their smallest equivalent characters based on the equivalence rules.","class Solution:
+    def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
+        "
+1062,Medium,"You are given a string `s`, and your task is to find the length of the longest substring that repeats at least twice within the string. If no such substring exists, return `0`.","class Solution:
+    def longestRepeatingSubstring(self, s: str) -> int:
+        "
+1063,Hard,"You are given an array `nums`, and your task is to count the number of non-empty subarrays where the leftmost element is not larger than any other element in the subarray. A subarray is defined as a contiguous segment of the array. Return the total count of such subarrays.","class Solution:
+    def validSubarrays(self, nums: List[int]) -> int:
+        "
+1064,Easy,"You are given a sorted array `arr` of distinct integers, and your task is to find the smallest index `i` such that `arr[i] == i`. If no such index exists, return `-1`. The array is sorted in ascending order。","class Solution:
+    def fixedPoint(self, arr: List[int]) -> int:
+        "
+1065,Easy,"You are given a string `text` and an array of unique strings `words`. Your task is to find all index pairs `[i, j]` such that the substring `text[i...j]` matches any string in `words`. Return the pairs in sorted order, prioritizing the starting index `i` and, in case of ties, the ending index `j`. Matches in the text can overlap.","class Solution:
+    def indexPairs(self, text: str, words: List[str]) -> List[List[int]]:
+        "
+1108,Easy,"Given a valid (IPv4) IP `address`, return a defanged version of that IP address.","class Solution:
+    def defangIPaddr(self, address: str) -> str:
+        "
+1067,Hard,"You are given a single-digit integer `d` and two integers `low` and `high`. Your task is to count the total number of times the digit `d` appears in all integers within the inclusive range `[low, high]`. This includes counting multiple occurrences of `d` in the same number if applicable.","class Solution:
+    def digitsCount(self, d: int, low: int, high: int) -> int:
+        "
+1106,Hard,"You are tasked with evaluating a valid boolean expression represented as a string. The boolean expression can consist of: t, f, NOT, AND, OR, parentheses and commas","class Solution:
+    def parseBoolExpr(self, expression: str) -> bool:
+        "
+1118,Easy,"Given a year year and a month month, determine the number of days in the specified month. Consider leap year rules for February.","class Solution:
+    def numberOfDays(self, year: int, month: int) -> int:
+        "
+1119,Easy,"Given a string s, remove all the vowels ('a', 'e', 'i', 'o', 'u') from the string and return the resulting string.","class Solution:
+    def removeVowels(self, s: str) -> str:
+        "
+1071,Easy,"You are given two strings, `str1` and `str2`, and your task is to find the largest string `x` such that `x` divides both `str1` and `str2`. A string `t` divides a string `s` if `s` can be formed by concatenating `t` one or more times. If no such string exists, return an empty string.","class Solution:
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        "
+1121,Hard,"The task is to determine if a sorted integer array nums can be divided into one or more disjoint increasing subsequences, each of length at least k. The subsequences must use all elements of nums, and no element can appear in more than one subsequence.","class Solution:
+    def canDivideIntoSubsequences(self, nums: List[int], k: int) -> bool:
+        "
+1122,Easy,The task is to sort the elements of arr1 based on the order of elements in arr2. Elements in arr2 dictate the relative ordering of matching elements in arr1,"class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        "
+1074,Hard,"You are given a 2D `matrix` and an integer `target`. Your task is to find the number of distinct non-empty submatrices whose elements sum to the given `target`. A submatrix is defined by its top-left and bottom-right corners, and two submatrices are considered different if they have at least one different coordinate. Return the count of such submatrices.","class Solution:
+    def numSubmatrixSumTarget(self, matrix: List[List[int]], target: int) -> int:
+        "
+1125,Hard,"The task is to find the smallest sufficient team to cover all required skills given a list of required skills req_skills and a list of people with their respective skill sets. A team is sufficient if for every required skill in req_skills, at least one person in the team possesses that skill. The solution must return the indices of the people in the smallest sufficient team.","class Solution:
+    def smallestSufficientTeam(self, req_skills: List[str], people: List[List[str]]) -> List[int]:
+        "
+1128,Easy,You are tasked with finding the number of equivalent domino pairs in a list of dominoes. Two dominoes are considered equivalent if they have the same values in any order,"class Solution:
+    def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
+        "
+1133,Easy,"You are tasked with finding the largest integer in a given array nums that occurs only once. If no such integer exists, return -1. ","class Solution:
+    def largestUniqueNumber(self, nums: List[int]) -> int:
+        "
+1078,Easy,"You are given a string `text` and two words, `first` and `second`. Your task is to find all words `third` that follow the pattern `""first second third""` in the text, where `second` appears immediately after `first`, and `third` appears immediately after `second`. Return an array of all such `third` words in the order they appear in the text.","class Solution:
+    def findOcurrences(self, text: str, first: str, second: str) -> List[str]:
+        "
+1134,Easy,"Given an integer n, determine whether it is an Armstrong number. An Armstrong number is a  k-digit number such that the sum of its digits, each raised to the power of k, equals the number itself","class Solution:
+    def isArmstrong(self, n: int) -> bool:
+        "
+1137,Easy,"The task is to compute the n-th number in the Tribonacci sequence, Tn = Tn-1 + Tn-2 + Tn-3","class Solution:
+    def tribonacci(self, n: int) -> int:
+        "
+1147,Hard,"The task is to determine the largest possible value of \( k \) such that a given string `text` can be split into \( k \) non-empty substrings \((subtext1, subtext2, ..., subtextk)\) satisfying specific conditions: The concatenation of all substrings equals the original string: \( subtext1 + subtext2 + \dots + subtextk = text \).\; The substrings are symmetric: \( subtexti = subtextk - i + 1 \) for all valid \( i \).","class Solution:
+    def longestDecomposition(self, text: str) -> int:
+        "
+1150,Easy,The task is to determine whether a given target element is a majority element in a sorted integer array nums. A majority element is defined as an element that appears more than half the length of the array,"class Solution:
+    def isMajorityElement(self, nums: List[int], target: int) -> bool:
+        "
+1153,Hard,"You are tasked with determining whether you can transform one string, str1, into another string, str2, of the same length through a series of character conversions. In a single conversion, you can change all occurrences of a character in str1 to any other lowercase English character. The transformation must eventually make str1 identical to str2","class Solution:
+    def canConvert(self, str1: str, str2: str) -> bool:
+        "
+1154,Easy,"You are tasked with determining the day number of the year for a given Gregorian calendar date string in the format YYYY-MM-DD. The day number of the year is the position of the given date in that year, starting from January 1 as day 1","class Solution:
+    def dayOfYear(self, date: str) -> int:
+        "
+1085,Easy,"You are given an array of integers `nums`. Your task is to determine whether the sum of the digits of the smallest number in the array is odd or even. Return `0` if the sum is odd, and `1` if the sum is even.","class Solution:
+    def sumOfDigits(self, nums: List[int]) -> int:
+        "
+1086,Easy,"You are given a list of student scores, where each score is represented as `[IDi, scorei]`. Your task is to calculate the **top five average** score for each student. Return the result as an array of pairs `[IDj, topFiveAveragej]`, where the results are sorted by `IDj` in increasing order.","class Solution:
+    def highFive(self, items: List[List[int]]) -> List[List[int]]:
+        "
+1157,Hard,The task is to design a data structure that efficiently determines the majority element in a subarray of a given array arr. The majority element is defined as an element that appears at least threshold times in the specified subarray. You should have initialization and query function.,"class MajorityChecker:
+
+    def __init__(self, arr: List[int]):
+
+
+    def query(self, left: int, right: int, threshold: int) -> int:
+
+
+
+# Your MajorityChecker object will be instantiated and called as such:
+# obj = MajorityChecker(arr)
+# param_1 = obj.query(left,right,threshold)"
+1088,Hard,"You are tasked with finding the number of confusing numbers in the range [1, n]. A confusing number is one that, when rotated 180 degrees, forms a valid number different from itself. Valid rotations are: 0, 1, 6, 9, 8. Invalid digits are 2, 3, 4, 5, and 7. Given an integer n, you must count how many numbers in the range [1, n] satisfy this property.","class Solution:
+    def confusingNumberII(self, n: int) -> int:
+        "
+1089,Easy,"You are tasked with modifying a fixed-length integer array by duplicating each zero in the array and shifting all subsequent elements to the right to accommodate the duplication. The operation must be performed in place, meaning no additional memory can be used, and elements that would exceed the array's original length are discarded. The goal is to ensure the input array reflects these changes without returning a new array.","class Solution:
+    def duplicateZeros(self, arr: List[int]) -> None:
+        """"""
+        Do not return anything, modify arr in-place instead.
+        """"""
+        "
+1160,Easy,"You are tasked with calculating the total length of all ""good"" strings in an array words. A string is considered ""good"" if it can be constructed using the characters from the string chars, where each character in chars can only be used once per string.","class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        "
+1163,Hard,You are tasked with finding the last substring in lexicographical order from a given string s,"class Solution:
+    def lastSubstring(self, s: str) -> str:
+        "
+1092,Hard,"You are tasked with finding the shortest string that contains both given strings, `str1` and `str2`, as subsequences. A subsequence of a string is formed by deleting zero or more characters without changing the order of the remaining characters. The solution must return a valid shortest string that satisfies this property, and if multiple solutions exist, any one of them can be returned.","class Solution:
+    def shortestCommonSupersequence(self, str1: str, str2: str) -> str:
+        "
+1165,Easy,"You are tasked with calculating the total time required to type a given string word on a special keyboard with all keys arranged in a single row, described by the string keyboard. The string keyboard provides the layout of keys, where the index of each character represents its position on the keyboard.","class Solution:
+    def calculateTime(self, keyboard: str, word: str) -> int:
+        "
+1299,Easy,"Given an array arr, replace each element with the greatest element among the elements to its right, and replace the last element with -1","class Solution:
+    def replaceElements(self, arr: List[int]) -> List[int]:
+        "
+1095,Hard,"You are tasked with finding the minimum index where a given `target` value exists in a **mountain array**, using an interactive `MountainArray` interface. A mountain array is defined as an array where elements strictly increase to a peak and then strictly decrease. You can only access the array using two interface methods: `MountainArray.get(k)`, which retrieves the element at index `k`, and `MountainArray.length()`, which returns the array's length. Your solution must minimize the number of calls to `MountainArray.get` (not exceeding 100) and return `-1` if the `target` is not found in the array.","# """"""
+# This is MountainArray's API interface.
+# You should not implement it, or speculate about its implementation
+# """"""
+#class MountainArray:
+#    def get(self, index: int) -> int:
+#    def length(self) -> int:
+
+class Solution:
+    def findInMountainArray(self, target: int, mountainArr: 'MountainArray') -> int:
+        "
+1096,Hard,"You are tasked with evaluating a string expression that represents a set of lowercase words based on a specific grammar. The grammar allows for single letters, unions of sets with comma-separated expressions enclosed in curly braces, and concatenations of expressions. Your goal is to compute all the unique words that can be generated by the expression, ensuring the result is a sorted list of these words.","class Solution:
+    def braceExpansionII(self, expression: str) -> List[str]:
+        "
+1175,Easy,You are tasked with finding the number of valid permutations of integers from 1 to n such that all prime numbers are placed at prime indices (1-indexed).,"class Solution:
+    def numPrimeArrangements(self, n: int) -> int:
+        "
+1180,Easy,You are tasked with calculating the number of substrings in a given string s where each substring contains only one distinct letter. The result should account for all possible substrings formed by contiguous segments of identical characters in the string.,"class Solution:
+    def countLetters(self, s: str) -> int:
+        "
+1099,Easy,"You are tasked with finding the maximum possible sum of two distinct integers in an array nums such that their sum is less than a given integer k. The goal is to identify two indices i and j where i < j and nums[i] + nums[j] = sum, ensuring sum < k, and then return the largest such sum. If no such pair exists, return -1.","class Solution:
+    def twoSumLessThanK(self, nums: List[int], k: int) -> int:
+        "
+1185,Easy,"You are tasked with determining the day of the week for a given date specified by three integers: day, month, and year. The result should be returned as one of the seven day names: { ""Sunday"", ""Monday"", ""Tuesday"", ""Wednesday"", ""Thursday"", ""Friday"", ""Saturday"" }. ","class Solution:
+    def dayOfTheWeek(self, day: int, month: int, year: int) -> str:
+        "
+1500,Medium,"You are given a file-sharing system that allows users to join and leave while owning specific chunks of a file. Each user is assigned a unique ID, and when they leave the system, the ID can be reused. The system should be able to return the list of users owning a particular chunk when requested.","class FileSharing:
+
+    def __init__(self, m: int):
+
+
+    def join(self, ownedChunks: List[int]) -> int:
+
+
+    def leave(self, userID: int) -> None:
+
+
+    def request(self, userID: int, chunkID: int) -> List[int]:
+
+
+
+# Your FileSharing object will be instantiated and called as such:
+# obj = FileSharing(m)
+# param_1 = obj.join(ownedChunks)
+# obj.leave(userID)
+# param_3 = obj.request(userID,chunkID)"
+1502,Easy,"You are given an array of numbers, and your task is to determine if the array can be rearranged to form an arithmetic progression. An arithmetic progression is defined as a sequence where the difference between any two consecutive elements is the same.","class Solution:
+    def canMakeArithmeticProgression(self, arr: List[int]) -> bool:
+        "
+1503,Medium,"You are given a wooden plank of length n and two arrays left and right, representing the positions of ants moving towards the left and right, respectively. The goal is to determine the time when the last ant falls off the plank, assuming the ants change directions when they meet but continue moving without any delay.","class Solution:
+    def getLastMoment(self, n: int, left: List[int], right: List[int]) -> int:
+        "
+1504,Medium,You are given an m x n binary matrix mat. Your task is to return the number of submatrices that have all ones.,"class Solution:
+    def numSubmat(self, mat: List[List[int]]) -> int:
+        "
+1505,Hard,"You are given a string num representing the digits of a very large integer and an integer k. Your task is to return the minimum integer you can obtain as a string by performing at most k adjacent swaps of digits. If it cannot be done, return the original string.","class Solution:
+    def minInteger(self, num: str, k: int) -> str:
+        "
+1506,Medium,"You are given all the nodes of an N-ary tree as an array of Node objects, where each node has a unique value. Your task is to find and return the root of the N-ary tree.","""""""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: Optional[int] = None, children: Optional[List['Node']] = None):
+        self.val = val
+        self.children = children if children is not None else []
+""""""
+
+class Solution:
+    def findRoot(self, tree: List['Node']) -> 'Node':
+        "
+1507,Easy,You are given a date string in the form Day Month Year. Your task is to convert the date string to the format YYYY-MM-DD.,"class Solution:
+    def reformatDate(self, date: str) -> str:
+        "
+1508,Medium,You are given the array `nums` consisting of `n` positive integers. Your task is to return the sum of the numbers from index `left` to index `right` (indexed from 1) in the new array formed by computing and sorting the sums of all non-empty continuous subarrays from `nums`. Return the result modulo `109 + 7`.,"class Solution:
+    def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
+        "
+1509,Medium,You are given an integer array `nums`. Your task is to return the minimum difference between the largest and smallest value of `nums` after performing at most three moves.,"class Solution:
+    def minDifference(self, nums: List[int]) -> int:
+        "
+1510,Hard,"You are given a positive integer `n`. Your task is to return `true` if Alice wins the game and `false` if Bob wins the game, assuming both players play optimally.","class Solution:
+    def winnerSquareGame(self, n: int) -> bool:
+        "
+1512,Easy,"You are given an array of integers `nums`. Your task is to return the number of good pairs, where a pair `(i, j)` is called good if `nums[i] == nums[j]` and `i < j`.","class Solution:
+    def numIdenticalPairs(self, nums: List[int]) -> int:
+        "
+1513,Medium,You are given a binary string `s`. Your task is to return the number of substrings with all characters being '1's. Return the result modulo `10^9 + 7`.,"class Solution:
+    def numSub(self, s: str) -> int:
+        "
+1514,Medium,"You are given an undirected weighted graph with `n` nodes and edges with probabilities of success. Your task is to find the path with the maximum probability of success from the `start` node to the `end` node and return its success probability. If no path exists, return `0`.","class Solution:
+    def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
+        "
+1515,Hard,You are given the positions of customers on a 2D map. Your task is to determine the position of a service center that minimizes the sum of the Euclidean distances to all customers.,"class Solution:
+    def getMinDistSum(self, positions: List[List[int]]) -> float:
+        "
+1516,Hard,"You are given the `root` of an N-ary tree of unique values and two nodes `p` and `q`. Your task is to move the subtree of node `p` to become a direct child of node `q`. If `p` is already a direct child of `q`, do not change anything. Return the root of the tree after adjusting it.","""""""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: Optional[int] = None, children: Optional[List['Node']] = None):
+        self.val = val
+        self.children = children if children is not None else []
+""""""
+
+class Solution:
+    def moveSubTree(self, root: 'Node', p: 'Node', q: 'Node') -> 'Node':
+        "
+1518,Easy,You are given `numBottles` full water bottles and `numExchange` empty bottles needed to exchange for a full one. Your task is to return the maximum number of water bottles you can drink.,"class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        "
+1519,Medium,You are given a tree consisting of `n` nodes with exactly `n - 1` edges and a root node `0`. Each node has a unique label given in the string `labels`. Your task is to return an array where `ans[i]` is the number of nodes in the subtree of the `ith` node with the same label as node `i`.,"class Solution:
+    def countSubTrees(self, n: int, edges: List[List[int]], labels: str) -> List[int]:
+        "
+1520,Hard,"You are given a string `s` of lowercase letters. Your task is to find the maximum number of non-empty substrings of `s` that do not overlap and contain all occurrences of any character within them. If there are multiple solutions with the same number of substrings, return the one with minimum total length.","class Solution:
+    def maxNumOfSubstrings(self, s: str) -> List[str]:
+        "
+1521,Hard,"You are given an integer array `arr` and an integer `target`. Your task is to find the values `l` and `r` that minimize the value `|func(arr, l, r) - target|`. Return the minimum possible value of this expression.","class Solution:
+    def closestToTarget(self, arr: List[int], target: int) -> int:
+        "
+1522,Medium,"You are given the `root` of an N-ary tree. Your task is to compute the length of the diameter of the tree, which is the longest path between any two nodes in the tree. This path may or may not pass through the root.","""""""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: Optional[int] = None, children: Optional[List['Node']] = None):
+        self.val = val
+        self.children = children if children is not None else []
+""""""
+
+class Solution:
+    def diameter(self, root: 'Node') -> int:
+        """"""
+        :type root: 'Node'
+        :rtype: int
+        """""""
+1523,Easy,You are given two non-negative integers `low` and `high`. Your task is to return the count of odd numbers between `low` and `high` (inclusive).,"class Solution:
+    def countOdds(self, low: int, high: int) -> int:
+        "
+1524,Medium,You are given an array of integers `arr`. Your task is to return the number of subarrays with an odd sum. Return the answer modulo `10^9 + 7`.,"class Solution:
+    def numOfSubarrays(self, arr: List[int]) -> int:
+        "
+1525,Medium,"You are given a string `s`. Your task is to return the number of good splits, where a good split divides `s` into two non-empty strings `sleft` and `sright` such that both strings have the same number of distinct letters.","class Solution:
+    def numSplits(self, s: str) -> int:
+        "
+1526,Hard,"You are given an integer array `target`. Your task is to return the minimum number of operations required to form the `target` array from an initial array of the same size with all elements initially set to zero. In one operation, you can choose any subarray from `initial` and increment each value by one.","class Solution:
+    def minNumberOperations(self, target: List[int]) -> int:
+        "
+1528,Easy,"You are given a string `s` and an integer array `indices` of the same length. Your task is to return the shuffled string, where the character at the `ith` position in `s` moves to `indices[i]` in the shuffled string.","class Solution:
+    def restoreString(self, s: str, indices: List[int]) -> str:
+        "
+1529,Medium,"You are given a 0-indexed binary string `target` of length `n` and another binary string `s` of the same length, initially set to all zeros. Your task is to return the minimum number of operations needed to make `s` equal to `target`. In one operation, you can pick an index `i` and flip all bits in the inclusive range `[i, n - 1]`.","class Solution:
+    def minFlips(self, target: str) -> int:
+        "
+1530,Medium,"You are given the `root` of a binary tree and an integer `distance`. Your task is to return the number of good leaf node pairs, where a pair is considered good if the shortest path between the two leaf nodes is less than or equal to `distance`.","# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def countPairs(self, root: Optional[TreeNode], distance: int) -> int:
+        "
+1531,Hard,You are given a string `s` and an integer `k`. Your task is to delete at most `k` characters from `s` such that the run-length encoded version of `s` has the minimum length.,"class Solution:
+    def getLengthOfOptimalCompression(self, s: str, k: int) -> int:
+        "
+1533,Medium,"You are given an integer array `arr`, where all integers are equal except for one, which is larger than the rest. Your task is to return the index of the largest integer using the `ArrayReader` API with the `compareSub` function, which compares the sums of subarrays, and the `length` function, which returns the size of the array.","# """"""
+# This is ArrayReader's API interface.
+# You should not implement it, or speculate about its implementation
+# """"""
+#class ArrayReader(object):
+#	 # Compares the sum of arr[l..r] with the sum of arr[x..y]
+#	 # return 1 if sum(arr[l..r]) > sum(arr[x..y])
+#	 # return 0 if sum(arr[l..r]) == sum(arr[x..y])
+#	 # return -1 if sum(arr[l..r]) < sum(arr[x..y])
+#    def compareSub(self, l: int, r: int, x: int, y: int) -> int:
+#
+#	 # Returns the length of the array
+#    def length(self) -> int:
+#
+
+
+class Solution:
+    def getIndex(self, reader: 'ArrayReader') -> int:
+        "
+1534,Easy,"You are given an array of integers `arr` and three integers `a`, `b`, and `c`. Your task is to find the number of good triplets.","class Solution:
+    def countGoodTriplets(self, arr: List[int], a: int, b: int, c: int) -> int:
+        "
+1535,Medium,"You are given an integer array `arr` of distinct integers and an integer `k`. Your task is to determine which integer will win the game played between the first two elements of the array, where the larger integer wins and remains at position `0`, and the smaller integer moves to the end of the array. The game ends when an integer wins `k` consecutive rounds. Return the integer which will win the game.","class Solution:
+    def getWinner(self, arr: List[int], k: int) -> int:
+        "
+1536,Medium,"You are given an `n x n` binary `grid`. Your task is to return the minimum number of steps needed to make the grid valid, where a valid grid has all cells above the main diagonal as zeros, or return `-1` if it cannot be made valid. You can swap two adjacent rows in each step.","class Solution:
+    def minSwaps(self, grid: List[List[int]]) -> int:
+        "
+1537,Hard,"You are given two sorted arrays of distinct integers `nums1` and `nums2`. Your task is to return the maximum score you can obtain from all possible valid paths, where a valid path is defined by starting from the beginning of either array and switching arrays at most once when encountering a common element. The score is the sum of unique values in the valid path. Return the score modulo `10^9 + 7`.","class Solution:
+    def maxSum(self, nums1: List[int], nums2: List[int]) -> int:
+        "
+1538,Medium,"You are given an integer array `nums` where all integers are `0` or `1`. Your task is to return any index of the most frequent value in `nums` using the `ArrayReader` API, which provides a `query` function to compare subarrays and a `length` function to get the size of the array. If there is a tie, return `-1`. You are allowed to call `query()` at most `2 * n` times.","# """"""
+# This is the ArrayReader's API interface.
+# You should not implement it, or speculate about its implementation
+# """"""
+#class ArrayReader(object):
+#	 # Compares 4 different elements in the array
+#	 # return 4 if the values of the 4 elements are the same (0 or 1).
+#	 # return 2 if three elements have a value equal to 0 and one element has value equal to 1 or vice versa.
+#	 # return 0 : if two element have a value equal to 0 and two elements have a value equal to 1.
+#    def query(self, a: int, b: int, c: int, d: int) -> int:
+#
+#	 # Returns the length of the array
+#    def length(self) -> int:
+#
+
+class Solution:
+    def guessMajority(self, reader: 'ArrayReader') -> int:"
+1539,Easy,"You are given an array `arr` of positive integers sorted in strictly increasing order and an integer `k`. Your task is to return the `kth` positive integer that is missing from this array. If there are multiple missing integers, return the `kth` one.
+","class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        "
+1540,Medium,"Your task is to check if you can convert string `s` to string `t` in `k` moves or fewer. Each move allows you to pick an index and shift the character a certain number of times, or do nothing. Return `true` if it's possible, otherwise return `false`.","class Solution:
+    def canConvertString(self, s: str, t: str, k: int) -> bool:
+        "
+1541,Medium,"You are given a parentheses string `s` containing only the characters `'('` and `')'`. Your task is to return the minimum number of insertions needed to make `s` balanced, where a balanced string has every `'('` corresponding to two consecutive `'))'` and follows the correct order.","class Solution:
+    def minInsertions(self, s: str) -> int:
+        "
+1542,Hard,"You are given a string `s`. Your task is to return the length of the longest **awesome** substring of `s`, which is a non-empty substring that can be rearranged into a palindrome by making any number of swaps.","class Solution:
+    def longestAwesome(self, s: str) -> int:
+        "
+1544,Easy,"You are given a string `s` of lower and upper case English letters. Your task is to return the string after making it good, where a good string does not have two adjacent characters that are the same letter but different cases. You can remove pairs of such characters until the string becomes good. An empty string is also considered good.","class Solution:
+    def makeGood(self, s: str) -> str:
+        "
+1545,Medium,"Your task is to return the `kth` bit in the binary string `Sn`, formed by concatenating the previous string, a ""1"", and the reversed inverted version of the previous string.","class Solution:
+    def findKthBit(self, n: int, k: int) -> str:
+        "
+1546,Medium,"Given an array `nums` and an integer `target`, your task is to return the maximum number of non-empty, non-overlapping subarrays such that the sum of each subarray is equal to `target`.","class Solution:
+    def maxNonOverlapping(self, nums: List[int], target: int) -> int:
+        "
+1547,Hard,"You are given a wooden stick of length `n` units. Your task is to return the minimum total cost of performing a set of given cuts at specified positions, with each cut costing the length of the stick being cut. You can rearrange the order of the cuts to minimize the total cost.
+","class Solution:
+    def minCost(self, n: int, cuts: List[int]) -> int:
+        "
+1548,Hard,"You are given `n` cities and `m` bi-directional roads connecting pairs of cities. Your task is to find a path in the graph that matches a given `targetPath` in length and has the minimum edit distance. The path should be valid, meaning there must be a direct road between consecutive cities in the path. Return the order of the nodes in the path with the minimum edit distance.","class Solution:
+    def mostSimilar(self, n: int, roads: List[List[int]], names: List[str], targetPath: List[str]) -> List[int]:
+        "
+1550,Easy,"You are given an integer array `arr`. Your task is to return `true` if there are three consecutive odd numbers in the array. Otherwise, return `false`.","class Solution:
+    def threeConsecutiveOdds(self, arr: List[int]) -> bool:
+        "
+1551,Medium,"You are given an array `arr` of length `n` where `arr[i] = (2 * i) + 1`. Your task is to return the minimum number of operations needed to make all the elements of the array equal. In one operation, you can select two indices `x` and `y` and adjust their values to balance the array.","class Solution:
+    def minOperations(self, n: int) -> int:
+        "
+1552,Medium,Your task is to distribute `m` balls into `n` baskets such that the minimum magnetic force between any two balls is maximized. The magnetic force between two balls at positions `x` and `y` is `|x - y|`. Return the required force.,"class Solution:
+    def maxDistance(self, position: List[int], m: int) -> int:
+        "
+1553,Hard,"You are given `n` oranges and your task is to determine the minimum number of days needed to eat all of them. Each day, you can either eat one orange, eat half the remaining oranges if the count is divisible by 2, or eat two-thirds of the remaining oranges if the count is divisible by 3. Return the minimum number of days to eat all `n` oranges.","class Solution:
+    def minDays(self, n: int) -> int:
+        "
+1554,Medium,"You are given a list of strings `dict` where all strings have the same length. Return `true` if there are two strings that differ by exactly one character at the same index, otherwise return `false`.","class Solution:
+    def differByOne(self, dict: List[str]) -> bool:
+        "
+1556,Easy,"You are given an integer `n`. Your task is to add a dot (""."") as the thousands separator and return it in string format.","class Solution:
+    def thousandSeparator(self, n: int) -> str:
+        "
+1557,Medium,You are given a directed acyclic graph with `n` vertices and an array `edges` representing directed edges between nodes. Your task is to find the smallest set of vertices from which all nodes are reachable. It is guaranteed that there is a unique solution. You can return the vertices in any order.,"class Solution:
+    def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
+        "
+1558,Medium,"You are given an integer array `nums` and another array `arr` of the same length, initialized with all values set to `0`. Your task is to convert `arr` to `nums` using the minimum number of calls to the modify function, which allows incrementing elements or doubling all elements. Return the minimum number of function calls to achieve this.","class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        "
+1559,Medium,"You are given a 2D array `grid` of characters. Your task is to return `true` if there is any cycle of the same value in the grid, where a cycle is a path of length 4 or more that starts and ends at the same cell. You can move to adjacent cells with the same value, but you cannot revisit the last visited cell. Otherwise, return `false`.","class Solution:
+    def containsCycle(self, grid: List[List[str]]) -> bool:
+        "
+1560,Easy,"You are given an integer `n` and an integer array `rounds`. Your task is to return an array of the most visited sectors, sorted in ascending order, after a marathon on a circular track with `n` sectors. The marathon consists of `m` rounds, and you move counter-clockwise on the track.
+","class Solution:
+    def mostVisited(self, n: int, rounds: List[int]) -> List[int]:
+        "
+1561,Medium,"You and your friends will take coins from 3n piles as follows: Choose any 3 piles in each step. Alice picks the pile with the most coins, you pick the next, and Bob takes the last. Repeat until all piles are taken. Given the integer array piles, return the maximum number of coins you can collect.","class Solution:
+    def maxCoins(self, piles: List[int]) -> int:
+        "
+1562,Medium,"You are given an array `arr` representing a permutation of numbers from `1` to `n` and a binary string of size `n` initially set to zero. At each step `i` (1-indexed), set the bit at position `arr[i]` to `1`. Given an integer `m`, find the latest step at which there is a group of ones of length exactly `m`. If no such group exists, return `-1`.","class Solution:
+    def findLatestStep(self, arr: List[int], m: int) -> int:
+        "
+1563,Hard,"You are given an array `stoneValue` representing the values of stones arranged in a row. In each round, Alice divides the row into two non-empty rows, and Bob discards the row with the maximum value, adding the value of the remaining row to Alice's score. If both rows have equal values, Alice decides which row to discard. The game ends when only one stone is left. Return the maximum score Alice can obtain.","class Solution:
+    def stoneGameV(self, stoneValue: List[int]) -> int:
+        "
+1564,Medium,"You and your friends will take coins from 3n piles. Choose any 3 piles in each step. Alice picks the pile with the most coins, you pick the next, and Bob takes the last. Repeat until all piles are taken. Given the integer array `piles`, return the maximum number of coins you can collect.","class Solution:
+    def maxBoxesInWarehouse(self, boxes: List[int], warehouse: List[int]) -> int:
+        "
+1566,Easy,"You are given an array of positive integers `arr`. Find a pattern of length `m` that is repeated `k` or more times. A pattern is a subarray that is repeated multiple times consecutively without overlapping. Return `true` if such a pattern exists, otherwise return `false`.","class Solution:
+    def containsPattern(self, arr: List[int], m: int, k: int) -> bool:
+        "
+1567,Medium,"Given an array of integers `nums`, find the maximum length of a subarray where the product of all its elements is positive. A subarray is a consecutive sequence of values taken from the array. Return the maximum length of a subarray with a positive product.","class Solution:
+    def getMaxLen(self, nums: List[int]) -> int:
+        "
+1568,Hard,"You are given an `m x n` binary grid where `1` represents land and `0` represents water. An island is a maximal 4-directionally connected group of `1`'s. The grid is connected if it has exactly one island, otherwise it is disconnected. In one day, you can change any single land cell `(1)` into a water cell `(0)`. Return the minimum number of days to disconnect the grid.","class Solution:
+    def minDays(self, grid: List[List[int]]) -> int:
+        "
+1569,Hard,"Given an array `nums` representing a permutation of integers from `1` to `n`, construct a binary search tree (BST) by inserting elements of `nums` in order. Find the number of ways to reorder `nums` so that the constructed BST is identical to the original BST formed from `nums`. Return the result modulo `10^9 + 7`.","class Solution:
+    def numOfWays(self, nums: List[int]) -> int:
+        "
+1570,Medium,"You need to compute the dot product of two sparse vectors. Implement the `SparseVector` class with methods to initialize the vector and calculate the dot product. A sparse vector is one with mostly zero values, so efficient storage and computation are required.","class SparseVector:
+    def __init__(self, nums: List[int]):
+
+
+    # Return the dotProduct of two sparse vectors
+    def dotProduct(self, vec: 'SparseVector') -> int:
+
+
+# Your SparseVector object will be instantiated and called as such:
+# v1 = SparseVector(nums1)
+# v2 = SparseVector(nums2)
+# ans = v1.dotProduct(v2)"
+1572,Easy,"Given a square matrix `mat`, return the sum of the primary and secondary diagonals. Exclude double-counting any elements present on both diagonals.","class Solution:
+    def diagonalSum(self, mat: List[List[int]]) -> int:
+        "
+1573,Medium,"Given a binary string `s`, you need to split `s` into three non-empty strings `s1`, `s2`, and `s3` such that the number of ones is the same in each part. Return the number of ways to do this, modulo `10^9 + 7`.","class Solution:
+    def numWays(self, s: str) -> int:
+        "
+1574,Medium,"Given an integer array `arr`, remove a subarray to make the remaining elements non-decreasing. Return the length of the shortest subarray to remove. A subarray is a contiguous sequence of the array.","class Solution:
+    def findLengthOfShortestSubarray(self, arr: List[int]) -> int:
+        "
+1575,Hard,"You are given an array `locations` of distinct positive integers representing the positions of cities, along with integers `start`, `finish`, and `fuel` representing the starting city, ending city, and the initial amount of fuel. At each step, you can move from city `i` to city `j` (where `j != i`), reducing the fuel by the absolute distance between the cities. Fuel cannot become negative, and you are allowed to visit any city multiple times. Return the count of all possible routes from `start` to `finish`, modulo `10^9 + 7`.","class Solution:
+    def countRoutes(self, locations: List[int], start: int, finish: int, fuel: int) -> int:
+        "
+1576,Easy,"Given a string with lowercase letters and '?', replace all '?' so no characters repeat. Return the final string.","class Solution:
+    def modifyString(self, s: str) -> str:
+        "
+1577,Medium,"Given two arrays of integers nums1 and nums2, return the number of triplets formed (type 1 and type 2) under the following rules: Type 1: Triplet (i, j, k) if nums1[i]^2 == nums2[j] * nums2[k]. Type 2: Triplet (i, j, k) if nums2[i]^2 == nums1[j] * nums1[k].","class Solution:
+    def numTriplets(self, nums1: List[int], nums2: List[int]) -> int:
+        "
+1578,Medium,"Alice has `n` balloons arranged on a rope, represented by the string `colors`. She wants no two consecutive balloons to be of the same color. Bob can help by removing some balloons, taking `neededTime[i]` seconds to remove the `ith` balloon. Return the minimum time Bob needs to make the rope colorful.","class Solution:
+    def minCost(self, colors: str, neededTime: List[int]) -> int:
+        "
+1579,Hard,"Alice and Bob have an undirected graph with `n` nodes and three types of edges: Type 1 can be traversed by Alice only, Type 2 by Bob only, and Type 3 by both. Given an array `edges` where each edge has a type and connects two nodes, find the maximum number of edges you can remove while still allowing Alice and Bob to fully traverse the graph. If it's not possible to fully traverse the graph, return `-1`.","class Solution:
+    def maxNumEdgesToRemove(self, n: int, edges: List[List[int]]) -> int:
+        "
+1580,Medium,"Given two arrays, `boxes` and `warehouse`, representing the heights of boxes and warehouse rooms, find the maximum number of boxes you can place in the warehouse. Boxes cannot be stacked and can be inserted from either side, but they will stop if a room's height is less than the box's height.","class Solution:
+    def maxBoxesInWarehouse(self, boxes: List[int], warehouse: List[int]) -> int:
+        "
+1582,Easy,"Given an `m x n` binary matrix `mat`, return the number of special positions in `mat`. A position `(i, j)` is called special if `mat[i][j] == 1` and all other elements in row `i` and column `j` are `0`.","class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        "
+1583,Medium,"You are given a list of preferences for an even number of friends. Each person has a list of friends sorted by preference. All friends are paired, but some may be unhappy with their pairing. A friend is unhappy if they prefer someone else over their current pair, and that person also prefers them over their own pair. Return the number of unhappy friends.","class Solution:
+    def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[int]]) -> int:
+        "
+1584,Medium,"Given an array `points` representing coordinates on a 2D-plane, find the minimum cost to connect all points. The cost is the Manhattan distance between two points, ensuring there is exactly one simple path between any two points.","class Solution:
+    def minCostConnectPoints(self, points: List[List[int]]) -> int:
+        "
+1585,Hard,"Given two strings `s` and `t`, transform `s` into `t` by repeatedly sorting any non-empty substring of `s` in ascending order. Return `true` if it is possible to transform `s` into `t`, otherwise return `false`.
+","class Solution:
+    def isTransformable(self, s: str, t: str) -> bool:
+        "
+1588,Easy,"Given an array of positive integers `arr`, return the sum of all possible odd-length subarrays. An odd-length subarray is a contiguous sequence of the array with an odd number of elements.","class Solution:
+    def sumOddLengthSubarrays(self, arr: List[int]) -> int:
+        "
+1591,Hard,"Given an `m x n` matrix `targetGrid` where each element represents a color, return `true` if it's possible to print the matrix with a special printer. The printer can print a solid rectangular pattern of a single color in one turn, covering up existing colors, and each color can only be used once.","class Solution:
+    def isPrintable(self, targetGrid: List[List[int]]) -> bool:
+        "
+1592,Easy,"You have a string `text` with words separated by spaces. Rearrange the spaces so there is an equal number of spaces between each pair of words, maximizing that number. If there are extra spaces, place them at the end. Return the modified string.","class Solution:
+    def reorderSpaces(self, text: str) -> str:
+        "
+1598,Easy,"Given a list of operations logs representing folder changes in the Leetcode file system, return the minimum number of operations needed to return to the main folder. The operations are: ""../"": Move to the parent folder. ""./"": Remain in the same folder. ""x/"": Move to the child folder named x.","class Solution:
+    def minOperations(self, logs: List[str]) -> int:
+        "
+1603,Easy,"Design a parking system with three types of parking spaces: big, medium, and small. Implement the ParkingSystem class: ParkingSystem(int big, int medium, int small): Initializes the number of slots for each parking space. bool addCar(int carType): Checks if there's an available parking space of carType (1 for big, 2 for medium, 3 for small). Returns true if the car can be parked, otherwise returns false.","class ParkingSystem:
+
+    def __init__(self, big: int, medium: int, small: int):
+
+
+    def addCar(self, carType: int) -> bool:
+
+
+
+# Your ParkingSystem object will be instantiated and called as such:
+# obj = ParkingSystem(big, medium, small)
+# param_1 = obj.addCar(carType)"
+1608,Easy,"Given an array `nums` of non-negative integers, determine if it is special. An array is special if there exists a number `x` such that there are exactly `x` numbers in the array that are greater than or equal to `x`. If `x` exists, return it; otherwise, return `-1`.","class Solution:
+    def specialArray(self, nums: List[int]) -> int:
+        "
+1614,Easy,"Given a valid parentheses string (VPS) `s`, return its nesting depth. The depth is determined by the maximum level of nested parentheses. For instance, for the string `""(1+(2*3)+((8)/4))+1""`, the nesting depth is `3`, as the digit `8` is inside three sets of parentheses.","class Solution:
+    def maxDepth(self, s: str) -> int:
+        "
+1619,Easy,"Given an array of integers `arr`, return the mean of the remaining integers after removing the smallest 5% and the largest 5% of the elements. Your answer should be within `10^-5` of the actual answer.","class Solution:
+    def trimMean(self, arr: List[int]) -> float:
+        "
+1624,Easy,"Given a string `s`, return the length of the longest substring between two equal characters, excluding the two characters themselves. If no such substring exists, return `-1`.","class Solution:
+    def maxLengthBetweenEqualCharacters(self, s: str) -> int:
+        "
+1629,Easy,"You have a sequence of key presses recorded as a string `keysPressed` and a list `releaseTimes` showing when each key was released. Each key press has a duration based on the difference in release times. Find the key with the longest press duration. If there are multiple keys with the same duration, return the lexicographically largest key.","class Solution:
+    def slowestKey(self, releaseTimes: List[int], keysPressed: str) -> str:
+        "
+1636,Easy,"Given an array of integers `nums`, sort the array in increasing order based on the frequency of the values. If multiple values have the same frequency, sort them in decreasing order. Return the sorted array.","class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        "
+1640,Easy,"Given an array `arr` of distinct integers and an array of integer arrays `pieces`, where the integers in `pieces` are also distinct, your task is to determine if you can form `arr` by concatenating the arrays in `pieces` in any order. However, you cannot reorder the integers within each array `pieces[i]`. Return `true` if it is possible to form `arr` from `pieces`, otherwise return `false`.","class Solution:
+    def canFormArray(self, arr: List[int], pieces: List[List[int]]) -> bool:
+        "
+1646,Easy,"Given an integer n, generate an array nums of length n + 1 as follows: nums[0] = 0, nums[1] = 1, For 2 <= 2 * i <= n, nums[2 * i] = nums[i], For 2 <= 2 * i + 1 <= n, nums[2 * i + 1] = nums[i] + nums[i + 1], Return the maximum integer in the array nums.","class Solution:
+    def getMaximumGenerated(self, n: int) -> int:
+        "
+1652,Easy,"Given a circular array code and an integer key k, decrypt the code by replacing every number as follows: If k > 0, replace the ith number with the sum of the next k numbers. If k < 0, replace the ith number with the sum of the previous k numbers. If k == 0, replace the ith number with 0. The circular nature of the array means that the next element after the last is the first element, and the previous element before the first is the last element. Return the decrypted code.","class Solution:
+    def decrypt(self, code: List[int], k: int) -> List[int]:
+        "
+1656,Easy,"Given a stream of `n` `(idKey, value)` pairs arriving in arbitrary order, design a stream that returns the values in increasing order of their IDs by returning a chunk of values after each insertion. Implement the `OrderedStream` class with a constructor `OrderedStream(int n)` and a method `String[] insert(int idKey, String value)` that inserts the pair and returns the largest possible chunk of currently inserted values in order.","class OrderedStream:
+
+    def __init__(self, n: int):
+
+
+    def insert(self, idKey: int, value: str) -> List[str]:
+
+
+
+# Your OrderedStream object will be instantiated and called as such:
+# obj = OrderedStream(n)
+# param_1 = obj.insert(idKey,value)"
+1662,Easy,"Given two string arrays `word1` and `word2`, return `true` if the two arrays represent the same string when their elements are concatenated in order; otherwise, return `false`.","class Solution:
+    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+        "
+1668,Easy,"Given two strings `sequence` and `word`, return the maximum `k`-repeating value of `word` in `sequence`. The `k`-repeating value is the highest value `k` where `word` repeated `k` times is a substring of `sequence`. If `word` is not a substring of `sequence`, return `0`.","class Solution:
+    def maxRepeating(self, sequence: str, word: str) -> int:
+        "
+1672,Easy,"Given an `m x n` grid `accounts` where `accounts[i][j]` is the amount of money the `ith` customer has in the `jth` bank, return the maximum wealth of the richest customer. A customer's wealth is the total amount of money they have across all their bank accounts.
+","class Solution:
+    def maxRepeating(self, sequence: str, word: str) -> int:
+        "
+1678,Easy,"Given a string command, return its interpretation based on the rules: ""G"" translates to ""G"", ""()"" translates to ""o"", ""(al)"" translates to ""al"", The interpreted strings are concatenated in their original order to form the final result.","class Solution:
+    def interpret(self, command: str) -> str:
+        "
+1684,Easy,"Given a string `allowed` consisting of distinct characters and an array of strings `words`, return the number of consistent strings in `words`. A string is consistent if all its characters appear in `allowed`.","class Solution:
+    def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
+        "
+1688,Easy,"Given an integer n representing the number of teams in a tournament with the following rules: If the number of teams is even, they are paired and n / 2 matches are played, advancing n / 2 teams. If the number of teams is odd, one team advances automatically and the rest are paired. (n - 1) / 2 matches are played, advancing (n - 1) / 2 + 1 teams. Return the total number of matches played until a winner is decided.","class Solution:
+    def numberOfMatches(self, n: int) -> int:
+        "
+1694,Easy,"Given a string `number` consisting of digits, spaces, and/or dashes, return the phone number formatted as follows: Remove all spaces and dashes, then group the digits into blocks of length 3 until there are 4 or fewer digits left. The final digits are grouped into one block of length 2, one block of length 3, or two blocks of length 2, and the blocks are joined by dashes.","class Solution:
+    def reformatNumber(self, number: str) -> str:
+        "
+1700,Easy,"Given two arrays `students` and `sandwiches`, return the number of students unable to eat. Students either prefer circular (0) or square (1) sandwiches. They take turns trying to take their preferred sandwich from the top of the stack. If a student doesn't get their preferred sandwich, they move to the end of the queue until no students can eat.","class Solution:
+    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+        "
+1704,Easy,"Given a string `s` of even length, split it into two halves: `a` and `b`. Two strings are considered **alike** if they have the same number of vowels. Vowels are `'a'`, `'e'`, `'i'`, `'o'`, `'u'`, and their uppercase counterparts. Return `true` if `a` and `b` are alike; otherwise, return `false`.","class Solution:
+    def halvesAreAlike(self, s: str) -> bool:
+        "
+1708,Easy,"Given an array of distinct integers nums, return the largest subarray of length k. An array A is considered larger than array B if for the first index i where A[i] != B[i], A[i] > B[i]. A subarray is a contiguous subsequence of the array.","class Solution:
+    def largestSubarray(self, nums: List[int], k: int) -> List[int]:
+        "

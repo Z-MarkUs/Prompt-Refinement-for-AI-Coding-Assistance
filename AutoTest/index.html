@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Interface</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f8fa;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-size: 1rem;
+      background-color: #fff;
+    }
+
+    textarea {
+      resize: vertical;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    button {
+      background-color: #5ba7f8;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #106fd5;
+    }
+
+    .section {
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .row .section {
+      flex: 1;
+    }
+
+    .row .section:last-child {
+      margin-right: 0;
+    }
+
+    #testCaseDisplay {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      background-color: #f7f8fa;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #e0e0e0;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+
+    #successRate1, #successRate2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      color: #000000;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #fafafa;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Section 1: Question Input -->
+  <div class="section">
+    <h2>Input Question</h2>
+    <textarea id="questionInput" rows="4" placeholder="Describe your question here..."></textarea>
+    <button onclick="generateAnswers()">Generate Answers</button>
+  </div>
+
+  <!-- Section 2 & 3: Generated Answers -->
+  <div class="row">
+    <div class="section">
+      <h2>Generated code based on the question description</h2>
+      <textarea id="answer1" rows="6" readonly placeholder="Answer from backend function 1..."></textarea>
+    </div>
+    <div class="section">
+      <h2>Generated code based on the refined question description</h2>
+      <textarea id="answer2" rows="6" readonly placeholder="Answer from backend function 2..."></textarea>
+    </div>
+  </div>
+
+  <!-- Section 4: Test Cases -->
+  <div class="section">
+    <h2>Test Cases</h2>
+    <select id="testCases">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+    <button onclick="loadTestCases()">Load Test Cases</button>
+    <div id="testCaseDisplay"></div>
+  </div>
+
+  <!-- Section 5 & 6: Success Rates -->
+  <div class="row">
+    <div class="section">
+      <h2>Success Rate (Original)</h2>
+      <div id="successRate1">N/A</div>
+    </div>
+    <div class="section">
+      <h2>Success Rate (Refined)</h2>
+      <div id="successRate2">N/A</div>
+    </div>
+  </div>
+
+  <script>
+    // Placeholder for backend integration
+    function generateAnswers() {
+      const question = document.getElementById("questionInput").value;
+      if (!question) {
+        alert("Please input a question description.");
+        return;
+      }
+      // Simulate backend-generated answers
+      document.getElementById("answer1").value = `Answer 1 for: "${question}"`;
+      document.getElementById("answer2").value = `Answer 2 for: "${question}"`;
+    }
+
+    function loadTestCases() {
+      const difficulty = document.getElementById("testCases").value;
+      let testCases = "";
+      switch (difficulty) {
+        case "easy":
+          testCases = "Test Case 1: Input A -> Output B\nTest Case 2: Input C -> Output D";
+          break;
+        case "medium":
+          testCases = "Test Case 1: Input X -> Output Y\nTest Case 2: Input Z -> Output W";
+          break;
+        case "hard":
+          testCases = "Test Case 1: Complex Input 1 -> Result 1\nTest Case 2: Complex Input 2 -> Result 2";
+          break;
+        default:
+          testCases = "No test cases available.";
+      }
+      document.getElementById("testCaseDisplay").textContent = testCases;
+    }
+
+    // Placeholder for success rate calculation
+    function calculateSuccessRates() {
+      document.getElementById("successRate1").textContent = "75%"; // Example static value
+      document.getElementById("successRate2").textContent = "90%"; // Example static value
+    }
+
+    // Simulate backend testing
+    document.getElementById("testCases").addEventListener("change", calculateSuccessRates);
+  </script>
+
+</body>
+</html>
