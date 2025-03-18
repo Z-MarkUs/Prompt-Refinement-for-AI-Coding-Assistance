@@ -1,0 +1,19 @@
+{
+    "success": 55,
+    "failed": 144,
+    "success_rate": 0.27638190954773867,
+    "failed_rate": 0.7236180904522613,
+    "score": 88.10077397513143,
+    "difficulty": {
+        "Easy": 31,
+        "Medium": 22,
+        "Hard": 2
+    },
+    "detail": {
+        "Runtime Error": 84,
+        "Wrong Answer": 55,
+        "Accepted": 55,
+        "Memory Limit Exceeded": 1,
+        "Time Limit Exceeded": 4
+    }
+}

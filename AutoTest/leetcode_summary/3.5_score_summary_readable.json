@@ -1,0 +1,18 @@
+{
+    "success": 134,
+    "failed": 63,
+    "success_rate": 0.6802030456852792,
+    "failed_rate": 0.3197969543147208,
+    "score": 227.1954519551498,
+    "difficulty": {
+        "Medium": 47,
+        "Easy": 72,
+        "Hard": 15
+    },
+    "detail": {
+        "Accepted": 134,
+        "Runtime Error": 18,
+        "Wrong Answer": 41,
+        "Time Limit Exceeded": 4
+    }
+}
