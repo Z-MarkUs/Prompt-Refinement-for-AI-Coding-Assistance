@@ -181,10 +181,28 @@ def test_benchmark_fingerprint_is_stable_and_content_sensitive() -> None:
     moved_line = [
         BenchmarkCase(1, "Easy", "Return one.", "class Solution:\n    def one(self):", 99)
     ]
+    crlf = [BenchmarkCase(1, "Easy", "Return one.", "class Solution:\r\n    def one(self):", 4)]
     changed = [BenchmarkCase(1, "Easy", "Return two.", "class Solution:\n    def one(self):", 4)]
 
     assert benchmark_fingerprint(original) == benchmark_fingerprint(moved_line)
+    assert benchmark_fingerprint(original) == benchmark_fingerprint(crlf)
     assert benchmark_fingerprint(original) != benchmark_fingerprint(changed)
+
+
+def test_repository_benchmark_fingerprint_is_checkout_newline_invariant(
+    tmp_path: Path,
+) -> None:
+    source = PROJECT_ROOT / "AutoTest" / "test.csv"
+    lf_checkout = tmp_path / "test.csv"
+    lf_checkout.write_bytes(source.read_bytes().replace(b"\r\n", b"\n"))
+
+    native_cases = load_benchmark(source)
+    lf_cases = load_benchmark(lf_checkout)
+
+    assert benchmark_fingerprint(native_cases) == benchmark_fingerprint(lf_cases)
+    assert [(case.task_id, case.source_line) for case in native_cases] == [
+        (case.task_id, case.source_line) for case in lf_cases
+    ]
 
 
 def test_load_and_validate_jsonl(tmp_path: Path) -> None:

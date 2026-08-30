@@ -37,11 +37,11 @@ Differences are arm B minus arm A on their exact ID intersection. The p-value is
 
 ## Benchmark audit and sensitivity
 
-The 200-task benchmark is structurally valid with 6 warnings. Its content fingerprint is `38523cb48d2ce31c278e1864e16123ca8ecdc2b9937f0c398046550a4b0e8bb4`.
+The 200-task benchmark is structurally valid with 6 warnings. Its content fingerprint is `27336817501b36544872d5edda0cffd066f2f51bdfde554a071a702c44eee1a0`.
 
-Validation-summary fingerprint: `5bf2e84120175242890bcbeaa4e07b77a946bb2fa4213be2846d270752691e2f`
+Validation-summary fingerprint: `b16d45670b14cf2e77542651b8ba7439454659d778c2b004f09003b24e7eb198`
 
-Correction manifest: `data/curated/benchmark_corrections.json` (`6495daaeeb662528a05a5da9d5a9e5330bd6745de9243e91926e1573f17c32f2`)
+Correction manifest: `data/curated/benchmark_corrections.json` (`8df14d14284d920394e842a3eeca502a41dbd1e3fa041f7c608aee91e704c152`)
 
 The benchmark IDs exactly match the union of recorded result IDs.
 
@@ -65,7 +65,7 @@ All arms share 190 tasks after those exclusions.
 
 A hash-bound review confirms equivalent task variants in the retained training export for benchmark IDs 1009, 1038. The exact binding between that export and the evaluated fine-tuned model is not recorded, so this is a leakage-risk sensitivity—not proof of model contamination.
 
-Overlap manifest: `data/curated/train_benchmark_overlaps.json` (`18175a7ab1404cec9ecd17880a0fd665348141481b253bb70e60fec1dcf4dda4`)
+Overlap manifest: `data/curated/train_benchmark_overlaps.json` (`3430d8ae7137d2f8e4a9674a8920aa05cb26a3c4db79c892e7b386bdf22d6e87`)
 
 All arms share 191 tasks after excluding the confirmed variants.
 

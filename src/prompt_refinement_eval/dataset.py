@@ -198,8 +198,8 @@ def load_benchmark(path: Path) -> list[BenchmarkCase]:
                 BenchmarkCase(
                     task_id=task_id,
                     difficulty=difficulty.strip(),
-                    description=description.strip(),
-                    signature=signature.rstrip(),
+                    description=_canonical_newlines(description).strip(),
+                    signature=_canonical_newlines(signature).rstrip(),
                     source_line=source_line,
                 )
             )
@@ -703,8 +703,8 @@ def benchmark_fingerprint(cases: Sequence[BenchmarkCase]) -> str:
         {
             "id": case.task_id,
             "difficulty": case.difficulty,
-            "description": case.description,
-            "signature": case.signature,
+            "description": _canonical_newlines(case.description),
+            "signature": _canonical_newlines(case.signature),
         }
         for case in cases
     ]
@@ -921,6 +921,10 @@ def _is_benchmark_header(row: list[str]) -> bool:
         ("id", "difficulty", "description", "signature"),
         ("task id", "difficulty", "description", "signature"),
     }
+
+
+def _canonical_newlines(value: str) -> str:
+    return value.replace("\r\n", "\n").replace("\r", "\n")
 
 
 def _case_issue(

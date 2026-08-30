@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "source": "AutoTest/test.csv",
   "source_record_count": 200,
-  "source_content_sha256": "38523cb48d2ce31c278e1864e16123ca8ecdc2b9937f0c398046550a4b0e8bb4",
+  "source_content_sha256": "27336817501b36544872d5edda0cffd066f2f51bdfde554a071a702c44eee1a0",
   "policy": "The CSV committed with the March 2025 repository remains unchanged. Apply these corrections only when creating a versioned curated benchmark.",
   "corrections": [
     {
