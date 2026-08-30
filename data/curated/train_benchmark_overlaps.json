@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "normalization": "nfkc-casefold-ascii-alnum-v1",
+  "sources": {
+    "benchmark": {
+      "path": "AutoTest/test.csv",
+      "record_count": 200,
+      "content_sha256": "38523cb48d2ce31c278e1864e16123ca8ecdc2b9937f0c398046550a4b0e8bb4"
+    },
+    "train": {
+      "path": "Model Fine-Tuning/train.jsonl",
+      "record_count": 736,
+      "content_sha256": "e119d1414bacbd3a2ce97fcea8720c6a5fbb32d66e5bb0e162ef74fabe98d811"
+    }
+  },
+  "policy": {
+    "exact_normalized_match": "validator error; do not use as an evaluation split",
+    "semantic_variant": "human-reviewed, hash-bound manifest decision",
+    "fuzzy_match": "review candidate only; never an automatic exclusion",
+    "historical_model_binding": "unknown: the preserved repository does not bind this exact training export to the evaluated fine-tuned model artifact"
+  },
+  "confirmed_overlaps": [
+    {
+      "split": "train",
+      "train_source_line": 74,
+      "benchmark_task_id": 1038,
+      "benchmark_source_line": 150,
+      "classification": "equivalent_task_variant",
+      "normalized_component_sha256": {
+        "user_prompt": "fb3f26717107b86d048834a19527dfb8fb502fda4e71b95460f6399a9858857b",
+        "assistant_description": "af7e8a4ca580906aa5ae6a77ceb8214b3e3defd29d41928ef4d6a39af75cbcaa",
+        "benchmark_description": "a0591f322458fc11354321b68e55eb2c60bcf60a9d8f1f3c819b81573d64e4c8"
+      },
+      "normalized_bundle_sha256": "32249e9c71415f9f0738c14d2f0cf587259b37c8a16fefc6dc83f0495e4605da"
+    },
+    {
+      "split": "train",
+      "train_source_line": 620,
+      "benchmark_task_id": 1009,
+      "benchmark_source_line": 31,
+      "classification": "equivalent_task_variant",
+      "normalized_component_sha256": {
+        "user_prompt": "29d1e6f47ac7eae5170c5edb352e52e5312b33d315a077dcd309cb375d3f8623",
+        "assistant_description": "81fd7d92cb22c29cb2d30e7490d8a03691608e29e89c2d39f926cd41e5ab9003",
+        "benchmark_description": "1fef3698f3662478f39bcae0125b09132bc4b2699a3076b3f27a5eb59c72514d"
+      },
+      "normalized_bundle_sha256": "db962d81122b31689739811f67e66be485f3cddf070184b1959b329e968b7046"
+    }
+  ],
+  "reviewed_non_overlaps": [
+    {
+      "split": "train",
+      "train_source_line": 624,
+      "benchmark_task_id": 1522,
+      "benchmark_source_line": 460,
+      "classification": "related_but_distinct",
+      "review_note": "binary-tree diameter and N-ary-tree diameter have materially different interfaces and problem domains",
+      "normalized_component_sha256": {
+        "user_prompt": "18d3377913e43c5e8813810a5b4294f0e2e79ae550b502cd3a067ea01cc3898e",
+        "assistant_description": "ee076475712d56fe2ce81c883d01b3fd26d43c82b82903eec939f981ed27ca77",
+        "benchmark_description": "90e9f7f00fee8c2e29b0acc1d0b66dca242c69e774a5ad2f27754c14769e618c"
+      },
+      "normalized_bundle_sha256": "4d4ce7b8988e2a012d4a02156457ae330148ad5beb1a64bbed2db9221dc36d6e"
+    },
+    {
+      "split": "train",
+      "train_source_line": 270,
+      "benchmark_task_id": 1150,
+      "benchmark_source_line": 293,
+      "classification": "related_but_distinct",
+      "review_note": "finding an unsorted-array majority element differs from testing a target in a sorted array",
+      "normalized_component_sha256": {
+        "user_prompt": "cf8e0278abf4d750e6cdbb85976b9cf4872f114ea41c413d2645d8069f6fc4de",
+        "assistant_description": "9d0058a77a451dd58ca92ff04f4dbb91920e772fe67a7a61cad8e6c86a27c9f1",
+        "benchmark_description": "23f372d97d91cb9b8d585038d5a0bff303f7b73a945bf6596eb06d21219e5210"
+      },
+      "normalized_bundle_sha256": "ee71c1d6fe7e5e193d49b16c48d85c112e810c4f896703ffb7457c9bcad20d3e"
+    },
+    {
+      "split": "train",
+      "train_source_line": 219,
+      "benchmark_task_id": 1008,
+      "benchmark_source_line": 22,
+      "classification": "related_but_distinct",
+      "review_note": "validating a preorder sequence differs from constructing and returning a BST",
+      "normalized_component_sha256": {
+        "user_prompt": "82d8ff821618c724ceb7c2e47c6cddb77301a95d140bd407498bc55e8f04f0da",
+        "assistant_description": "03c2c00d9c163f13c829e97d14eac9312492bbbf35af8923d6357ddc53c49459",
+        "benchmark_description": "9e161e81176f72087c147ff0184272c8b4e87a1fd28f6bf551705977bc20715e"
+      },
+      "normalized_bundle_sha256": "9e849a3f609f5fa94833ca5a1f8ae9f51620bdddb51b4a0720ae4965abe57d0a"
+    },
+    {
+      "split": "train",
+      "train_source_line": 625,
+      "benchmark_task_id": 1121,
+      "benchmark_source_line": 263,
+      "classification": "related_but_distinct",
+      "review_note": "fixed minimum length three differs from a parameterized minimum length k",
+      "normalized_component_sha256": {
+        "user_prompt": "feec82984dc3e3eb9266453683faa7baacd5210d82c7d19fb422b9d2579eb25d",
+        "assistant_description": "121412082467dccd20b18cd82845bcc995498ccd2fca0748ba04c08eebe2f698",
+        "benchmark_description": "488f16122a3d3e2c44c25e4f555104d5937d6603edd15029fd5c8454de3fc492"
+      },
+      "normalized_bundle_sha256": "8197aeb8b6552874eaf69e6b059568e7d58bd9c572a2b02d87ccba44a90ea876"
+    }
+  ]
+}

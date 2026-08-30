@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An evidence-first case study of prompt refinement for AI code generation. The historical benchmark found no demonstrated improvement over direct generation.">
+    <meta name="author" content="Hehan Zhao">
+    <meta name="theme-color" content="#0b1520">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Prompt Refinement, Tested">
+    <meta property="og:description" content="A reproducible re-analysis of a historical 200-task AI coding experiment, with an honest negative result.">
+    <meta property="og:url" content="https://z-markus.github.io/Prompt-Refinement-for-AI-Coding-Assistance/">
+    <meta property="og:site_name" content="Prompt Refinement, Tested">
+    <meta property="og:image" content="https://z-markus.github.io/Prompt-Refinement-for-AI-Coding-Assistance/social-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Prompt Refinement, Tested — a 200-task historical re-analysis with no demonstrated improvement.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://z-markus.github.io/Prompt-Refinement-for-AI-Coding-Assistance/social-card.png">
+    <meta name="twitter:image:alt" content="Prompt Refinement, Tested — a 200-task historical re-analysis with no demonstrated improvement.">
+    <title>Prompt Refinement, Tested — Historical AI Coding Benchmark</title>
+    <link rel="canonical" href="https://z-markus.github.io/Prompt-Refinement-for-AI-Coding-Assistance/">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Prompt Refinement study, home">
+        <span class="wordmark-mark" aria-hidden="true">PR</span>
+        <span class="wordmark-copy">
+          <strong>Prompt Refinement</strong>
+          <span>Historical evaluation</span>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#methods">Methods</a>
+        <a href="#results">Results</a>
+        <a href="#pipeline">Pipeline</a>
+        <a href="#engineering">Engineering</a>
+        <a href="#limitations">Limitations</a>
+      </nav>
+      <a class="header-link" href="https://github.com/Z-MarkUs/Prompt-Refinement-for-AI-Coding-Assistance" target="_blank" rel="noreferrer">
+        View repository
+        <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="hero section-shell" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span aria-hidden="true"></span> Historical benchmark · evidence first</p>
+          <h1 id="hero-title">Prompt refinement,<br><em>tested—not assumed.</em></h1>
+          <p class="hero-lede">
+            A 200-task code-generation study compared direct generation with two
+            prompt-refinement workflows. The attractive hypothesis did not survive the test.
+          </p>
+
+          <div class="verdict-card" role="note" aria-label="Study conclusion">
+            <span class="verdict-icon" aria-hidden="true">↘</span>
+            <div>
+              <p class="verdict-label">Observed conclusion</p>
+              <p><strong>No demonstrated improvement.</strong> Prompt refinement did not beat the direct baseline on correctness in this historical benchmark.</p>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#results">Explore the evidence <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="https://github.com/Z-MarkUs/Prompt-Refinement-for-AI-Coding-Assistance" target="_blank" rel="noreferrer">Inspect the code <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <aside class="hero-instrument reveal" aria-labelledby="snapshot-title">
+          <div class="instrument-header">
+            <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span>benchmark_snapshot.json</span>
+            <span class="status-pill"><i aria-hidden="true"></i> archived</span>
+          </div>
+          <div class="instrument-body">
+            <p class="instrument-kicker">Research question</p>
+            <h2 id="snapshot-title">Does an intermediate prompt refiner improve accepted solutions?</h2>
+            <div class="snapshot-bars" aria-label="Published acceptance rates">
+              <div class="snapshot-row">
+                <div><span>Direct</span><strong>68.0%</strong></div>
+                <div class="track" aria-hidden="true"><span style="--bar-size: 68%"></span></div>
+              </div>
+              <div class="snapshot-row">
+                <div><span>Fine-tuned refiner</span><strong>64.3%</strong></div>
+                <div class="track" aria-hidden="true"><span style="--bar-size: 64.3%"></span></div>
+              </div>
+              <div class="snapshot-row is-low">
+                <div><span>GPT-4o refiner</span><strong>27.6%</strong></div>
+                <div class="track" aria-hidden="true"><span style="--bar-size: 27.6%"></span></div>
+              </div>
+            </div>
+            <p class="instrument-note"><span aria-hidden="true">◇</span> Published result files; denominators vary by workflow.</p>
+          </div>
+          <div class="instrument-footer">
+            <span>Result</span>
+            <strong>Hypothesis not supported</strong>
+          </div>
+        </aside>
+      </section>
+
+      <section class="evidence-strip" aria-label="Study at a glance">
+        <div class="section-shell evidence-grid">
+          <div class="evidence-item">
+            <strong>03</strong>
+            <span>workflows compared</span>
+          </div>
+          <div class="evidence-item">
+            <strong>193</strong>
+            <span>common verified tasks</span>
+          </div>
+          <div class="evidence-item">
+            <strong>p ≈ 0.34</strong>
+            <span>direct vs fine-tuned, paired exact</span>
+          </div>
+          <p class="evidence-context"><span aria-hidden="true">●</span> Historical evidence, not a live model leaderboard</p>
+        </div>
+      </section>
+
+      <section class="section section-shell" id="methods" aria-labelledby="methods-title">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow"><span aria-hidden="true"></span> 01 · Experimental design</p>
+            <h2 id="methods-title">One task. Three routes.</h2>
+          </div>
+          <p>The variable was the route from coding task to generated solution. Select a workflow to inspect its role and observed result.</p>
+        </div>
+
+        <div class="method-tabs reveal">
+          <div class="method-tablist" role="tablist" aria-label="Compared generation workflows">
+            <button class="method-card is-active" id="method-tab-direct" type="button" role="tab" aria-selected="true" aria-controls="method-panel-direct" tabindex="0">
+              <span class="method-index">01</span>
+              <span class="method-tag">Baseline</span>
+              <strong>Direct GPT-3.5</strong>
+              <span class="method-route">Task <i aria-hidden="true">→</i> generator</span>
+              <span class="method-rate">68.0% <small>published</small></span>
+            </button>
+            <button class="method-card" id="method-tab-finetuned" type="button" role="tab" aria-selected="false" aria-controls="method-panel-finetuned" tabindex="-1">
+              <span class="method-index">02</span>
+              <span class="method-tag">Refined</span>
+              <strong>Fine-tuned refiner</strong>
+              <span class="method-route">Task <i aria-hidden="true">→</i> refiner <i aria-hidden="true">→</i> generator</span>
+              <span class="method-rate">64.3% <small>published</small></span>
+            </button>
+            <button class="method-card" id="method-tab-gpt4o" type="button" role="tab" aria-selected="false" aria-controls="method-panel-gpt4o" tabindex="-1">
+              <span class="method-index">03</span>
+              <span class="method-tag">Refined</span>
+              <strong>GPT-4o refiner</strong>
+              <span class="method-route">Task <i aria-hidden="true">→</i> refiner <i aria-hidden="true">→</i> generator</span>
+              <span class="method-rate">27.6% <small>published</small></span>
+            </button>
+          </div>
+
+          <div class="method-detail">
+            <div id="method-panel-direct" role="tabpanel" aria-labelledby="method-tab-direct" tabindex="0">
+              <div>
+                <p class="detail-label">Control workflow</p>
+                <h3>The original coding task goes directly to GPT-3.5.</h3>
+              </div>
+              <p>This establishes the correctness baseline. With no intermediate rewrite, it also avoids adding information loss or prompt distortion before generation.</p>
+              <dl>
+                <div><dt>Published record</dt><dd>134 / 197 accepted</dd></div>
+                <div><dt>Common set</dt><dd>67.9% of 193</dd></div>
+              </dl>
+            </div>
+            <div id="method-panel-finetuned" role="tabpanel" aria-labelledby="method-tab-finetuned" tabindex="0" hidden>
+              <div>
+                <p class="detail-label">Experimental workflow A</p>
+                <h3>A fine-tuned refiner rewrites the task before GPT-3.5 generates code.</h3>
+              </div>
+              <p>The intended advantage was a clearer, more structured prompt. Its observed acceptance was descriptively below the direct route, and the paired test did not demonstrate a difference.</p>
+              <dl>
+                <div><dt>Published record</dt><dd>126 / 196 accepted</dd></div>
+                <div><dt>Common set</dt><dd>64.2% of 193</dd></div>
+              </dl>
+            </div>
+            <div id="method-panel-gpt4o" role="tabpanel" aria-labelledby="method-tab-gpt4o" tabindex="0" hidden>
+              <div>
+                <p class="detail-label">Experimental workflow B</p>
+                <h3>GPT-4o rewrites the task before GPT-3.5 generates code.</h3>
+              </div>
+              <p>This route produced the lowest historical acceptance. The result is reported as observed; the available evidence does not isolate why the rewrite harmed outcomes.</p>
+              <dl>
+                <div><dt>Published record</dt><dd>55 / 199 accepted</dd></div>
+                <div><dt>Common set</dt><dd>27.5% of 193</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark" id="results" aria-labelledby="results-title">
+        <div class="section-shell">
+          <div class="section-heading section-heading-light reveal">
+            <div>
+              <p class="eyebrow"><span aria-hidden="true"></span> 02 · Results</p>
+              <h2 id="results-title">The evidence says “not yet.”</h2>
+            </div>
+            <p>Both views tell the same practical story. Published files preserve the original records; the common set aligns all three workflows to the same 193 tasks.</p>
+          </div>
+
+          <div class="results-layout reveal">
+            <div class="results-card">
+              <div class="results-toolbar">
+                <div>
+                  <p class="toolbar-label">Acceptance rate</p>
+                  <p class="toolbar-note" id="result-view-description">Original published result files</p>
+                </div>
+                <div class="segmented-control" role="tablist" aria-label="Result dataset">
+                  <button id="result-tab-published" type="button" role="tab" aria-selected="true" aria-controls="result-panel-published">Published</button>
+                  <button id="result-tab-common" type="button" role="tab" aria-selected="false" aria-controls="result-panel-common" tabindex="-1">Common set</button>
+                </div>
+              </div>
+
+              <div class="result-panel" id="result-panel-published" role="tabpanel" aria-labelledby="result-tab-published" tabindex="0">
+                <div class="bar-chart" aria-hidden="true">
+                  <div class="chart-row">
+                    <div class="chart-label"><span>Direct GPT-3.5</span><strong>68.0%</strong></div>
+                    <div class="chart-track"><span style="--bar-size: 68%"></span></div>
+                    <small>134 accepted · 197 recorded</small>
+                  </div>
+                  <div class="chart-row">
+                    <div class="chart-label"><span>Fine-tuned refiner</span><strong>64.3%</strong></div>
+                    <div class="chart-track"><span style="--bar-size: 64.3%"></span></div>
+                    <small>126 accepted · 196 recorded</small>
+                  </div>
+                  <div class="chart-row is-low">
+                    <div class="chart-label"><span>GPT-4o refiner</span><strong>27.6%</strong></div>
+                    <div class="chart-track"><span style="--bar-size: 27.6%"></span></div>
+                    <small>55 accepted · 199 recorded</small>
+                  </div>
+                </div>
+                <table>
+                  <caption>Published historical acceptance results</caption>
+                  <thead><tr><th scope="col">Workflow</th><th scope="col">Accepted</th><th scope="col">Recorded</th><th scope="col">Rate</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Direct GPT-3.5</th><td>134</td><td>197</td><td>68.0%</td></tr>
+                    <tr><th scope="row">Fine-tuned refiner</th><td>126</td><td>196</td><td>64.3%</td></tr>
+                    <tr><th scope="row">GPT-4o refiner</th><td>55</td><td>199</td><td>27.6%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="result-panel" id="result-panel-common" role="tabpanel" aria-labelledby="result-tab-common" tabindex="0" hidden>
+                <div class="bar-chart" aria-hidden="true">
+                  <div class="chart-row">
+                    <div class="chart-label"><span>Direct GPT-3.5</span><strong>67.9%</strong></div>
+                    <div class="chart-track"><span style="--bar-size: 67.9%"></span></div>
+                    <small>Same 193 tasks</small>
+                  </div>
+                  <div class="chart-row">
+                    <div class="chart-label"><span>Fine-tuned refiner</span><strong>64.2%</strong></div>
+                    <div class="chart-track"><span style="--bar-size: 64.2%"></span></div>
+                    <small>Same 193 tasks</small>
+                  </div>
+                  <div class="chart-row is-low">
+                    <div class="chart-label"><span>GPT-4o refiner</span><strong>27.5%</strong></div>
+                    <div class="chart-track"><span style="--bar-size: 27.5%"></span></div>
+                    <small>Same 193 tasks</small>
+                  </div>
+                </div>
+                <table>
+                  <caption>Acceptance rates on the 193-task common set</caption>
+                  <thead><tr><th scope="col">Workflow</th><th scope="col">Accepted</th><th scope="col">Common tasks</th><th scope="col">Rate</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Direct GPT-3.5</th><td>131</td><td>193</td><td>67.9%</td></tr>
+                    <tr><th scope="row">Fine-tuned refiner</th><td>124</td><td>193</td><td>64.2%</td></tr>
+                    <tr><th scope="row">GPT-4o refiner</th><td>53</td><td>193</td><td>27.5%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <aside class="analysis-card" aria-labelledby="paired-title">
+              <p class="analysis-kicker">Paired comparison</p>
+              <p class="analysis-stat">p <span>≈</span> 0.34</p>
+              <h3 id="paired-title">No statistically demonstrated difference</h3>
+              <p>For direct GPT-3.5 versus the fine-tuned-refiner route, 194 task IDs were paired: direct-only successes were 23 versus 16 refinement-only successes. The −3.61 percentage-point difference has an exact p-value of 0.3368.</p>
+              <div class="analysis-rule"></div>
+              <p class="analysis-note"><strong>Sensitivity check:</strong> excluding the three likely task-identity conflicts leaves 191 paired tasks, 22 direct-only versus 16 refinement-only successes, a −3.14 percentage-point difference, and p = 0.4177. The conclusion is unchanged.</p>
+              <p class="analysis-note"><strong>Overlap risk check:</strong> excluding the two benchmark tasks with equivalent variants in the retained training export leaves 192 pairs. The 23 versus 16 discordances and exact p = 0.3368 are unchanged.</p>
+              <p class="analysis-note"><strong>Read this correctly:</strong> this is evidence against claiming a gain—not proof that refinement can never help.</p>
+            </aside>
+          </div>
+
+          <div class="honesty-banner reveal" role="note">
+            <span class="honesty-mark" aria-hidden="true">!</span>
+            <div>
+              <strong>The negative result is the result.</strong>
+              <p>This case study reports what happened without converting exploratory evidence into a success claim. That makes the work more useful: it exposes where the hypothesis needs better data, controls, and diagnosis.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-shell" id="pipeline" aria-labelledby="pipeline-title">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow"><span aria-hidden="true"></span> 03 · Evaluation pipeline</p>
+            <h2 id="pipeline-title">From task to evidence.</h2>
+          </div>
+          <p>The historical run connected generation to an external judge. The rebuilt project treats those records as immutable inputs and performs validation and comparison offline.</p>
+        </div>
+
+        <ol class="pipeline reveal">
+          <li>
+            <span class="pipeline-number">01</span>
+            <div class="pipeline-icon" aria-hidden="true">{ }</div>
+            <h3>Load archived tasks</h3>
+            <p>The historical run read the coding-task set and routed each task through three workflows.</p>
+          </li>
+          <li>
+            <span class="pipeline-number">02</span>
+            <div class="pipeline-icon" aria-hidden="true">↗</div>
+            <h3>Generate historically</h3>
+            <p>Each archived solution was created directly or after an intermediate prompt-refinement step.</p>
+          </li>
+          <li>
+            <span class="pipeline-number">03</span>
+            <div class="pipeline-icon" aria-hidden="true">✓</div>
+            <h3>Record judge outcomes</h3>
+            <p>The December 2024 historical run used an external judge. Current tests use only the retained local outcomes and make no submissions.</p>
+          </li>
+          <li>
+            <span class="pipeline-number">04</span>
+            <div class="pipeline-icon" aria-hidden="true">≡</div>
+            <h3>Normalize offline</h3>
+            <p>The evaluator aggregates historical outcomes while preserving each workflow’s actual denominator.</p>
+          </li>
+          <li>
+            <span class="pipeline-number">05</span>
+            <div class="pipeline-icon" aria-hidden="true">∆</div>
+            <h3>Compare by task ID</h3>
+            <p>The evaluator aligns IDs, exposes missingness, calculates effects, and runs exact paired tests.</p>
+          </li>
+        </ol>
+
+        <div class="principles-grid reveal">
+          <article>
+            <span aria-hidden="true">01 / 03</span>
+            <h3>Preserve denominators</h3>
+            <p>197, 196, and 199 recorded outcomes are shown as they were published. Missing outcomes are not silently converted into failures or successes.</p>
+          </article>
+          <article>
+            <span aria-hidden="true">02 / 03</span>
+            <h3>Compare like with like</h3>
+            <p>The 193-task common set removes denominator mismatch when comparing the three routes descriptively.</p>
+          </article>
+          <article>
+            <span aria-hidden="true">03 / 03</span>
+            <h3>Separate fact from inference</h3>
+            <p>Acceptance is observed. The reason a workflow performed differently remains a question for follow-up experiments.</p>
+          </article>
+        </div>
+
+        <div class="engineering-block reveal" id="engineering" aria-labelledby="engineering-title">
+          <div class="engineering-heading">
+            <div>
+              <p class="eyebrow eyebrow-light"><span aria-hidden="true"></span> 04 · Engineering rebuild</p>
+              <h2 id="engineering-title">Built to be audited, not merely admired.</h2>
+            </div>
+            <p>The portfolio version turns a one-off experiment into a typed, tested, reproducible re-analysis package while keeping the original evidence intact.</p>
+          </div>
+          <div class="engineering-grid">
+            <article>
+              <span>DATA</span>
+              <h3>Fingerprint every input</h3>
+              <p>Typed CSV and JSONL loaders surface schema defects, duplicates, empty content, task conflicts, cross-split overlap, and SHA-256 provenance.</p>
+            </article>
+            <article>
+              <span>STATS</span>
+              <h3>Pair before comparing</h3>
+              <p>ID-keyed joins report missing tasks, complete cases, discordant wins and losses, effect size, and exact McNemar p-values.</p>
+            </article>
+            <article>
+              <span>QUALITY</span>
+              <h3>Fail safely and offline</h3>
+              <p>Strict typing, lint, coverage gates, package builds, and deterministic tests run without model spend, credentials, or judge calls.</p>
+            </article>
+            <article>
+              <span>AGENTS</span>
+              <h3>Codex and Claude ready</h3>
+              <p>Mirrored repository skills teach coding agents the same evidence, safety, and claim-auditing workflow—and tests keep them identical.</p>
+            </article>
+          </div>
+          <aside class="contribution-note" aria-label="Role and contribution">
+            <p>Role &amp; contribution</p>
+            <p><a href="https://github.com/Z-MarkUs" target="_blank" rel="noreferrer">Hehan Zhao</a> created the original 2025 experiment repository and directed the 2026 AI-assisted rebuild across evidence preservation, data-quality rules, paired analysis, typed implementation, testing, and presentation.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section section-tint" id="limitations" aria-labelledby="limitations-title">
+        <div class="section-shell limitations-layout">
+          <div class="limitations-intro reveal">
+            <p class="eyebrow"><span aria-hidden="true"></span> 05 · Boundaries</p>
+            <h2 id="limitations-title">What this study can—and cannot—say.</h2>
+            <p>Good evaluation makes the boundary visible. These results support a narrow claim about this historical benchmark, not a universal claim about prompt refinement.</p>
+          </div>
+
+          <div class="accordion reveal">
+            <details open>
+              <summary><span>Historical snapshot</span><i aria-hidden="true"></i></summary>
+              <div><p>Models, APIs, and judge behavior can change. This site reports archived study outputs and should not be read as current model performance.</p></div>
+            </details>
+            <details>
+              <summary><span>Unequal published denominators</span><i aria-hidden="true"></i></summary>
+              <div><p>The original workflows contain 197, 196, and 199 recorded outcomes. The common 193-task view is the appropriate aligned descriptive comparison.</p></div>
+            </details>
+            <details>
+              <summary><span>Correctness is not total quality</span><i aria-hidden="true"></i></summary>
+              <div><p>Judge acceptance tests functional correctness for the evaluated cases. It does not fully measure readability, maintainability, security, cost, or latency.</p></div>
+            </details>
+            <details>
+              <summary><span>Causality remains unresolved</span><i aria-hidden="true"></i></summary>
+              <div><p>The observed outcomes do not isolate which prompt changes helped or harmed generation. A stronger follow-up would classify transformations and repeat trials.</p></div>
+            </details>
+            <details>
+              <summary><span>Scope is coding tasks</span><i aria-hidden="true"></i></summary>
+              <div><p>The findings should not be generalized to writing, analysis, agentic workflows, or every kind of software-engineering assistance.</p></div>
+            </details>
+            <details>
+              <summary><span>Legacy input quality</span><i aria-hidden="true"></i></summary>
+              <div><p>The benchmark audit flags repeated signatures and three likely prompt/signature conflicts. Fine-tuning checks find duplicate conversations, one additional repeated prompt, an empty assistant object, and an empty validation prompt. A hash-bound review confirms two equivalent task variants across the retained training export and benchmark, but the exact model/export binding is not recorded. Raw files remain unchanged; validation output and fingerprinted manifests make every decision explicit.</p></div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-shell" aria-labelledby="next-title">
+        <div class="next-study reveal">
+          <div class="next-copy">
+            <p class="eyebrow"><span aria-hidden="true"></span> The next experiment</p>
+            <h2 id="next-title">Turn the null result into a sharper question.</h2>
+            <p>Future work can move from “does refinement help?” to “which transformations help which task types, under what cost and reliability constraints?”</p>
+          </div>
+          <ul class="next-list">
+            <li><span aria-hidden="true">01</span> Repeat trials to estimate variance</li>
+            <li><span aria-hidden="true">02</span> Classify prompt transformations</li>
+            <li><span aria-hidden="true">03</span> Track cost and latency</li>
+            <li><span aria-hidden="true">04</span> Audit failures by task type</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="repo-cta" aria-labelledby="repo-title">
+        <div class="section-shell repo-cta-inner reveal">
+          <div>
+            <p class="eyebrow eyebrow-light"><span aria-hidden="true"></span> Open project</p>
+            <h2 id="repo-title">Inspect the implementation.<br>Challenge the conclusion.</h2>
+          </div>
+          <div>
+            <p>The repository contains the typed evaluator, generated evidence report, historical artifacts, CI, responsive showcase, and mirrored Codex and Claude skills.</p>
+            <div class="evidence-links" aria-label="Direct evidence links">
+              <a href="https://github.com/Z-MarkUs/Prompt-Refinement-for-AI-Coding-Assistance/blob/main/docs/results.md" target="_blank" rel="noreferrer">Results <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/Z-MarkUs/Prompt-Refinement-for-AI-Coding-Assistance/blob/main/docs/reproducibility.md" target="_blank" rel="noreferrer">Reproduce <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/Z-MarkUs/Prompt-Refinement-for-AI-Coding-Assistance/blob/main/docs/architecture.md" target="_blank" rel="noreferrer">Architecture <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/Z-MarkUs/Prompt-Refinement-for-AI-Coding-Assistance/blob/main/data/curated/benchmark_corrections.json" target="_blank" rel="noreferrer">Corrections <span aria-hidden="true">↗</span></a>
+            </div>
+            <a class="button button-light" href="https://github.com/Z-MarkUs/Prompt-Refinement-for-AI-Coding-Assistance" target="_blank" rel="noreferrer">Open on GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="section-shell footer-inner">
+        <p><strong>Prompt Refinement for AI Coding Assistance</strong><br><span>An honest historical evaluation by <a href="https://github.com/Z-MarkUs" target="_blank" rel="noreferrer">Hehan Zhao</a>.</span></p>
+        <p>Built to make the evidence legible.</p>
+        <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+      </div>
+    </footer>
+  </body>
+</html>
