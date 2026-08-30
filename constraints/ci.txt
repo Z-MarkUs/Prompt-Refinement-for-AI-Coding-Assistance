@@ -1,0 +1,12 @@
+# Exact toolchain used by CI and the documented local release gate.
+# Runtime dependencies remain declared as compatible ranges in pyproject.toml.
+build==1.6.0
+hatchling==1.32.0
+mypy==1.20.2
+openai==2.54.0
+pip==26.2.1
+pip-audit==2.10.1
+pytest==9.1.1
+pytest-cov==7.1.0
+ruff==0.16.5
+tomli==2.4.1; python_version < "3.11"

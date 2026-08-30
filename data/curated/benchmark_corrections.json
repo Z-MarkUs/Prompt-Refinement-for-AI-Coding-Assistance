@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "source": "AutoTest/test.csv",
+  "source_record_count": 200,
+  "source_content_sha256": "27336817501b36544872d5edda0cffd066f2f51bdfde554a071a702c44eee1a0",
+  "policy": "The CSV committed with the March 2025 repository remains unchanged. Apply these corrections only when creating a versioned curated benchmark.",
+  "corrections": [
+    {
+      "task_id": 1003,
+      "action": "replace_signature",
+      "original_method": "commonChars",
+      "original_signature": "class Solution:\n    def commonChars(self, words: List[str]) -> List[str]:",
+      "corrected_method": "isValid",
+      "corrected_canonical_signature": "class Solution:\n    def isValid(self, s: str) -> bool:",
+      "reason": "The prompt describes Check If Word Is Valid After Substitutions, but the raw signature is duplicated from task 1002 Common Characters.",
+      "provenance": {
+        "task_mapping": "AutoTest/leetcode_question_id_slug_mapping.json maps frontend_question_id 1003 to check-if-word-is-valid-after-substitutions.",
+        "local_evidence": [
+          "AutoTest/test.csv task 1002 contains the same commonChars signature with the matching Common Characters prompt.",
+          "AutoTest/leetcode_solutions/3.5/1003.py uses isValid(self, s: str) -> bool."
+        ]
+      }
+    },
+    {
+      "task_id": 1564,
+      "action": "replace_description",
+      "original_method": "maxBoxesInWarehouse",
+      "original_signature": "class Solution:\n    def maxBoxesInWarehouse(self, boxes: List[int], warehouse: List[int]) -> int:",
+      "corrected_method": "maxBoxesInWarehouse",
+      "corrected_canonical_signature": "class Solution:\n    def maxBoxesInWarehouse(self, boxes: List[int], warehouse: List[int]) -> int:",
+      "corrected_description_summary": "Given box heights and warehouse-room heights, return the maximum boxes that can be placed by inserting boxes from the left; a box cannot pass through a shorter room and each room holds at most one box.",
+      "reason": "The signature and task ID identify Put Boxes Into the Warehouse I, while the raw prompt instead describes Max Number of Coins You Can Get. The signature itself is already canonical; the prompt text is the field that requires replacement.",
+      "provenance": {
+        "task_mapping": "AutoTest/leetcode_question_id_slug_mapping.json maps frontend_question_id 1564 to put-boxes-into-the-warehouse-i.",
+        "local_evidence": [
+          "AutoTest/leetcode_solutions/3.5/1564.py starts with maxBoxesInWarehouse(self, boxes, warehouse).",
+          "AutoTest/test.csv task 1580 reuses the same entry point for the related warehouse-II task and has warehouse-matching prompt text."
+        ]
+      }
+    },
+    {
+      "task_id": 1672,
+      "action": "replace_signature",
+      "original_method": "maxRepeating",
+      "original_signature": "class Solution:\n    def maxRepeating(self, sequence: str, word: str) -> int:",
+      "corrected_method": "maximumWealth",
+      "corrected_canonical_signature": "class Solution:\n    def maximumWealth(self, accounts: List[List[int]]) -> int:",
+      "reason": "The prompt describes Richest Customer Wealth, but the raw signature is duplicated from task 1668 Maximum Repeating Substring.",
+      "provenance": {
+        "task_mapping": "AutoTest/leetcode_question_id_slug_mapping.json maps frontend_question_id 1672 to richest-customer-wealth.",
+        "local_evidence": [
+          "AutoTest/test.csv task 1668 contains the same maxRepeating signature with the matching sequence-and-word prompt.",
+          "AutoTest/leetcode_solutions/3.5/1672.py uses maximumWealth(self, accounts: List[List[int]]) -> int."
+        ]
+      }
+    }
+  ]
+}

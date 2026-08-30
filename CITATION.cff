@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software or its historical benchmark artifacts, please cite it
+  using this metadata.
+title: Prompt Refinement for AI Coding Assistance
+type: software
+authors:
+  - family-names: Zhao
+    given-names: Hehan
+    alias: Z-MarkUs
+version: 0.2.0
+repository-code: https://github.com/Z-MarkUs/Prompt-Refinement-for-AI-Coding-Assistance
+url: https://z-markus.github.io/Prompt-Refinement-for-AI-Coding-Assistance/
+abstract: >-
+  A reproducible re-analysis toolkit for validating a historical 200-problem coding
+  benchmark and comparing three prompt-generation arms with task-ID-paired analysis.
+keywords:
+  - code generation
+  - evaluation
+  - large language models
+  - prompt refinement
+  - reproducibility

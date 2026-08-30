@@ -1,2 +1,30 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+*.py text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.csv text eol=lf
+*.svg text eol=lf
+*.cff text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.png binary
+
+.env.example text eol=lf
+.editorconfig text eol=lf
+.gitattributes text eol=lf
+
+# Historical model outputs are evidence, not handwritten source statistics.
+AutoTest/leetcode_solutions/** linguist-generated=true
+AutoTest/leetcode_verify/** linguist-generated=true
+AutoTest/leetcode_summary/*_score_readable.json linguist-generated=true
+"Model Fine-Tuning/*.jsonl" linguist-generated=true
+results/*.json linguist-generated=true
+docs/results.md linguist-generated=true

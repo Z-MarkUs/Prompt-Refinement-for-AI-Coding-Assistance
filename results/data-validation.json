@@ -1,0 +1,231 @@
+{
+  "benchmark": {
+    "dataset": "benchmark",
+    "error_count": 0,
+    "fingerprint_policy": "canonical-json-sort-keys-compact-utf8-sha256-v1",
+    "is_valid": true,
+    "issues": [
+      {
+        "code": "benchmark.duplicate_signature",
+        "field": "signature",
+        "line_numbers": [
+          4,
+          7
+        ],
+        "message": "identical entry-point signature is reused by task IDs 1002, 1003; confirm that each description matches the entry point",
+        "record_ids": [
+          1002,
+          1003
+        ],
+        "severity": "warning"
+      },
+      {
+        "code": "benchmark.signature_description_mismatch",
+        "field": "signature",
+        "line_numbers": [
+          7
+        ],
+        "message": "'commonChars' shares no meaningful identifier terms with this description, while another task reusing the signature does; review task identity",
+        "record_ids": [
+          1003
+        ],
+        "severity": "warning"
+      },
+      {
+        "code": "benchmark.duplicate_signature",
+        "field": "signature",
+        "line_numbers": [
+          621,
+          672
+        ],
+        "message": "identical entry-point signature is reused by task IDs 1564, 1580; confirm that each description matches the entry point",
+        "record_ids": [
+          1564,
+          1580
+        ],
+        "severity": "warning"
+      },
+      {
+        "code": "benchmark.signature_description_mismatch",
+        "field": "signature",
+        "line_numbers": [
+          621
+        ],
+        "message": "'maxBoxesInWarehouse' shares no meaningful identifier terms with this description, while another task reusing the signature does; review task identity",
+        "record_ids": [
+          1564
+        ],
+        "severity": "warning"
+      },
+      {
+        "code": "benchmark.duplicate_signature",
+        "field": "signature",
+        "line_numbers": [
+          754,
+          757
+        ],
+        "message": "identical entry-point signature is reused by task IDs 1668, 1672; confirm that each description matches the entry point",
+        "record_ids": [
+          1668,
+          1672
+        ],
+        "severity": "warning"
+      },
+      {
+        "code": "benchmark.signature_description_mismatch",
+        "field": "signature",
+        "line_numbers": [
+          757
+        ],
+        "message": "'maxRepeating' shares no meaningful identifier terms with this description, while another task reusing the signature does; review task identity",
+        "record_ids": [
+          1672
+        ],
+        "severity": "warning"
+      }
+    ],
+    "record_count": 200,
+    "sha256": "27336817501b36544872d5edda0cffd066f2f51bdfde554a071a702c44eee1a0",
+    "warning_count": 6
+  },
+  "cross_dataset": {
+    "train_benchmark": {
+      "dataset": "train_benchmark_overlap",
+      "error_count": 0,
+      "fingerprint_policy": "utf8-bom-strip-newlines-lf-sha256-v1",
+      "is_valid": true,
+      "issues": [
+        {
+          "code": "cross_dataset.confirmed_task_overlap",
+          "field": "train.user+assistant.description+benchmark.description",
+          "line_numbers": [
+            74,
+            150
+          ],
+          "message": "curated review identifies an equivalent task variant in the training export; the repository does not record whether this exact export was bound to the evaluated fine-tuned model",
+          "record_ids": [
+            1038
+          ],
+          "severity": "warning"
+        },
+        {
+          "code": "cross_dataset.confirmed_task_overlap",
+          "field": "train.user+assistant.description+benchmark.description",
+          "line_numbers": [
+            620,
+            31
+          ],
+          "message": "curated review identifies an equivalent task variant in the training export; the repository does not record whether this exact export was bound to the evaluated fine-tuned model",
+          "record_ids": [
+            1009
+          ],
+          "severity": "warning"
+        }
+      ],
+      "record_count": 2,
+      "sha256": "3430d8ae7137d2f8e4a9674a8920aa05cb26a3c4db79c892e7b386bdf22d6e87",
+      "warning_count": 2
+    }
+  },
+  "fine_tuning": {
+    "train": {
+      "dataset": "fine_tuning",
+      "error_count": 3,
+      "fingerprint_policy": "canonical-json-sort-keys-compact-utf8-sha256-v1",
+      "is_valid": false,
+      "issues": [
+        {
+          "code": "fine_tuning.duplicate_conversation",
+          "field": "messages",
+          "line_numbers": [
+            203,
+            552
+          ],
+          "message": "identical conversation is repeated on 2 lines",
+          "record_ids": [],
+          "severity": "error"
+        },
+        {
+          "code": "fine_tuning.empty_assistant_object",
+          "field": "messages.assistant.content",
+          "line_numbers": [
+            271
+          ],
+          "message": "assistant content must encode a non-empty JSON object",
+          "record_ids": [],
+          "severity": "error"
+        },
+        {
+          "code": "fine_tuning.duplicate_conversation",
+          "field": "messages",
+          "line_numbers": [
+            616,
+            699
+          ],
+          "message": "identical conversation is repeated on 2 lines",
+          "record_ids": [],
+          "severity": "error"
+        },
+        {
+          "code": "fine_tuning.duplicate_user_prompt",
+          "field": "messages.user.content",
+          "line_numbers": [
+            203,
+            552
+          ],
+          "message": "normalized user prompt is repeated on 2 lines",
+          "record_ids": [],
+          "severity": "warning"
+        },
+        {
+          "code": "fine_tuning.duplicate_user_prompt",
+          "field": "messages.user.content",
+          "line_numbers": [
+            469,
+            567
+          ],
+          "message": "normalized user prompt is repeated on 2 lines",
+          "record_ids": [],
+          "severity": "warning"
+        },
+        {
+          "code": "fine_tuning.duplicate_user_prompt",
+          "field": "messages.user.content",
+          "line_numbers": [
+            616,
+            699
+          ],
+          "message": "normalized user prompt is repeated on 2 lines",
+          "record_ids": [],
+          "severity": "warning"
+        }
+      ],
+      "record_count": 736,
+      "sha256": "e119d1414bacbd3a2ce97fcea8720c6a5fbb32d66e5bb0e162ef74fabe98d811",
+      "warning_count": 3
+    },
+    "validation": {
+      "dataset": "fine_tuning",
+      "error_count": 1,
+      "fingerprint_policy": "canonical-json-sort-keys-compact-utf8-sha256-v1",
+      "is_valid": false,
+      "issues": [
+        {
+          "code": "fine_tuning.empty_content",
+          "field": "messages[1].content",
+          "line_numbers": [
+            112
+          ],
+          "message": "message 2 has empty content",
+          "record_ids": [],
+          "severity": "error"
+        }
+      ],
+      "record_count": 184,
+      "sha256": "4c7879a5d6883e3fb15c247b6ed3299b0258a46914f25a3a10946a16eea5f535",
+      "warning_count": 0
+    }
+  },
+  "is_valid": false,
+  "schema_version": "1.2"
+}

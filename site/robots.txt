@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://z-markus.github.io/Prompt-Refinement-for-AI-Coding-Assistance/sitemap.xml
