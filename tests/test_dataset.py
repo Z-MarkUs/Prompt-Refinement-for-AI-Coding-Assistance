@@ -264,7 +264,26 @@ def test_repository_overlap_manifest_is_hash_bound_and_emits_two_warnings() -> N
     assert report.is_valid
     assert report.record_count == 2
     assert report.error_count == 0
+    assert report.fingerprint_policy == "utf8-bom-strip-newlines-lf-sha256-v1"
     assert {issue.record_ids[0] for issue in overlaps} == {1009, 1038}
+
+
+def test_overlap_manifest_fingerprint_ignores_checkout_newlines(tmp_path: Path) -> None:
+    cases = load_benchmark(PROJECT_ROOT / "AutoTest" / "test.csv")
+    examples = load_jsonl(PROJECT_ROOT / "Model Fine-Tuning" / "train.jsonl")
+    source = (PROJECT_ROOT / "data" / "curated" / "train_benchmark_overlaps.json").read_bytes()
+    canonical = source.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    manifest_lf = tmp_path / "overlap-lf.json"
+    manifest_crlf = tmp_path / "overlap-crlf.json"
+    manifest_lf.write_bytes(canonical)
+    manifest_crlf.write_bytes(canonical.replace(b"\n", b"\r\n"))
+
+    report_lf = validate_train_benchmark_overlaps(cases, examples, manifest_lf)
+    report_crlf = validate_train_benchmark_overlaps(cases, examples, manifest_crlf)
+
+    assert report_lf.is_valid and report_crlf.is_valid
+    assert report_lf.sha256 == report_crlf.sha256
+    assert report_lf.fingerprint_policy == report_crlf.fingerprint_policy
 
 
 def test_exact_train_benchmark_text_match_is_a_hard_error(tmp_path: Path) -> None:

@@ -188,7 +188,7 @@ def _run_validate(args: argparse.Namespace) -> int:
         (cross_dataset,) if cross_dataset is not None else ()
     )
     payload: dict[str, object] = {
-        "schema_version": "1.1",
+        "schema_version": "1.2",
         "is_valid": all(report.is_valid for report in reports),
         "benchmark": benchmark.to_dict(),
         "fine_tuning": {

@@ -60,6 +60,8 @@ def test_markdown_report_keeps_negative_result_and_provenance_visible(tmp_path: 
     assert "## Training/benchmark overlap risk" in markdown
     assert "data/curated/overlaps.json" in markdown
     assert "not proof of model contamination" in markdown
+    assert "Canonical text SHA-256" in markdown
+    assert "normalize CRLF or CR newlines to LF" in markdown
 
 
 def test_markdown_report_uses_neutral_finding_without_named_baseline(tmp_path: Path) -> None:

@@ -65,6 +65,9 @@ auditable case study. The work spans experiment framing, raw-evidence preservati
 data-quality rules, ID-paired statistics, typed implementation, test strategy, and public
 presentation. Automated changes remain inspectable through source fingerprints,
 generated artifacts, and deterministic quality gates that make no model or judge calls.
+Text-artifact fingerprints are stable across checkouts: they remove an optional UTF-8
+BOM and normalize CRLF or CR newlines to LF before SHA-256, without changing other
+content.
 
 ## Engineering rebuild
 

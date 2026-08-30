@@ -5,6 +5,10 @@
     "settings": {
       "accepted_status": "Accepted",
       "complete_case_rule": "exact task-ID intersection",
+      "fingerprint_policies": {
+        "canonical-json-sort-keys-compact-utf8-sha256-v1": "JSON sorted by key with compact separators, encoded as UTF-8, then hashed with SHA-256",
+        "utf8-bom-strip-newlines-lf-sha256-v1": "UTF-8 text with an optional BOM removed and CRLF or CR newlines normalized to LF, then hashed with SHA-256"
+      },
       "multiple_comparison_adjustment": "none",
       "paired_test": "two-sided exact McNemar (binomial)",
       "pairing_key": "task_id"
@@ -26,7 +30,7 @@
           "note": "historical labels; exact provider snapshots are not recorded",
           "refiner": null
         },
-        "run_id": "historical-e8e159e80673",
+        "run_id": "historical-67b4ac716874",
         "run_id_source": "derived_from_source_sha256",
         "strategy": "direct generation"
       },
@@ -52,7 +56,8 @@
       },
       "observed_total": 197,
       "source": "AutoTest/leetcode_summary/3.5_score_readable.json",
-      "source_sha256": "e8e159e806736da7843cf0248a60ef3368152f283b179334e9308ab01be31fef"
+      "source_sha256": "67b4ac716874c3e971795fb711215972c47c91f056521cfc3cb448be60830771",
+      "source_sha256_policy": "utf8-bom-strip-newlines-lf-sha256-v1"
     },
     "finetuned_refiner_gpt35": {
       "acceptance_rate": 0.6428571428571429,
@@ -68,7 +73,7 @@
           "note": "historical labels; exact provider snapshots are not recorded",
           "refiner": "fine-tuned GPT-4o"
         },
-        "run_id": "historical-67525160ccc6",
+        "run_id": "historical-4a47e8ff6533",
         "run_id_source": "derived_from_source_sha256",
         "strategy": "fine-tuned prompt refinement then generation"
       },
@@ -96,7 +101,8 @@
       },
       "observed_total": 196,
       "source": "AutoTest/leetcode_summary/finetuned_score_readable.json",
-      "source_sha256": "67525160ccc644de9b78c2d30620daa5c75acdcf5502485853287d8a3bca6ee1"
+      "source_sha256": "4a47e8ff6533a4decc340148cd2b57124a792a23390de3de1b0d45a9b9f29a0e",
+      "source_sha256_policy": "utf8-bom-strip-newlines-lf-sha256-v1"
     },
     "gpt4o_refiner_gpt35": {
       "acceptance_rate": 0.27638190954773867,
@@ -112,7 +118,7 @@
           "note": "historical labels; exact provider snapshots are not recorded",
           "refiner": "GPT-4o"
         },
-        "run_id": "historical-63d6a9cb1420",
+        "run_id": "historical-989e56315b03",
         "run_id_source": "derived_from_source_sha256",
         "strategy": "general prompt refinement then generation"
       },
@@ -137,7 +143,8 @@
       },
       "observed_total": 199,
       "source": "AutoTest/leetcode_summary/4o_3.5_score_readable.json",
-      "source_sha256": "63d6a9cb1420615bb22a155b163b6778309b0cb98e9fa257f68d651a850b0051"
+      "source_sha256": "989e56315b03f136c259cb95a87a35cc160f7174e014488dab548d5f4c6a808d",
+      "source_sha256_policy": "utf8-bom-strip-newlines-lf-sha256-v1"
     }
   },
   "benchmark_alignment": {
@@ -148,6 +155,7 @@
   "benchmark_audit": {
     "correction_manifest": {
       "sha256": "8df14d14284d920394e842a3eeca502a41dbd1e3fa041f7c608aee91e704c152",
+      "sha256_policy": "utf8-bom-strip-newlines-lf-sha256-v1",
       "source": "data/curated/benchmark_corrections.json"
     },
     "error_count": 0,
@@ -171,6 +179,7 @@
       1672
     ],
     "sha256": "27336817501b36544872d5edda0cffd066f2f51bdfde554a071a702c44eee1a0",
+    "sha256_policy": "canonical-json-sort-keys-compact-utf8-sha256-v1",
     "source": "AutoTest/test.csv",
     "task_ids": [
       1001,
@@ -374,7 +383,8 @@
       1704,
       1708
     ],
-    "validation_summary_sha256": "b16d45670b14cf2e77542651b8ba7439454659d778c2b004f09003b24e7eb198",
+    "validation_summary_sha256": "117ec25353a5a526d45dacef99f1c2a808c7657fc0e0761d03b007984661969a",
+    "validation_summary_sha256_policy": "canonical-json-sort-keys-compact-utf8-sha256-v1",
     "warning_count": 6
   },
   "complete_cases": {
@@ -609,6 +619,7 @@
     },
     "is_valid": true,
     "manifest_sha256": "3430d8ae7137d2f8e4a9674a8920aa05cb26a3c4db79c892e7b386bdf22d6e87",
+    "manifest_sha256_policy": "utf8-bom-strip-newlines-lf-sha256-v1",
     "source": "data/curated/train_benchmark_overlaps.json",
     "warning_count": 2
   },
@@ -2422,7 +2433,7 @@
       ]
     }
   ],
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "sensitivity_analysis": {
     "complete_case_arms": {
       "baseline_gpt35": {
@@ -3534,6 +3545,7 @@
   },
   "task_union": {
     "sha256": "bcfa75f8eecdc322a41b17be16c8537f3d72db4ce028ec30f652c3f5b3ae22ec",
+    "sha256_policy": "canonical-json-sort-keys-compact-utf8-sha256-v1",
     "task_count": 200,
     "task_ids": [
       1001,

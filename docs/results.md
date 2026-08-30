@@ -39,9 +39,9 @@ Differences are arm B minus arm A on their exact ID intersection. The p-value is
 
 The 200-task benchmark is structurally valid with 6 warnings. Its content fingerprint is `27336817501b36544872d5edda0cffd066f2f51bdfde554a071a702c44eee1a0`.
 
-Validation-summary fingerprint: `b16d45670b14cf2e77542651b8ba7439454659d778c2b004f09003b24e7eb198`
+Validation-summary fingerprint: `117ec25353a5a526d45dacef99f1c2a808c7657fc0e0761d03b007984661969a`
 
-Correction manifest: `data/curated/benchmark_corrections.json` (`8df14d14284d920394e842a3eeca502a41dbd1e3fa041f7c608aee91e704c152`)
+Correction manifest newline-canonical content fingerprint: `data/curated/benchmark_corrections.json` (`8df14d14284d920394e842a3eeca502a41dbd1e3fa041f7c608aee91e704c152`)
 
 The benchmark IDs exactly match the union of recorded result IDs.
 
@@ -65,7 +65,7 @@ All arms share 190 tasks after those exclusions.
 
 A hash-bound review confirms equivalent task variants in the retained training export for benchmark IDs 1009, 1038. The exact binding between that export and the evaluated fine-tuned model is not recorded, so this is a leakage-risk sensitivity—not proof of model contamination.
 
-Overlap manifest: `data/curated/train_benchmark_overlaps.json` (`3430d8ae7137d2f8e4a9674a8920aa05cb26a3c4db79c892e7b386bdf22d6e87`)
+Overlap manifest newline-canonical content fingerprint: `data/curated/train_benchmark_overlaps.json` (`3430d8ae7137d2f8e4a9674a8920aa05cb26a3c4db79c892e7b386bdf22d6e87`)
 
 All arms share 191 tasks after excluding the confirmed variants.
 
@@ -85,19 +85,20 @@ All arms share 191 tasks after excluding the confirmed variants.
 
 Task-union fingerprint: `bcfa75f8eecdc322a41b17be16c8537f3d72db4ce028ec30f652c3f5b3ae22ec`
 
-| Arm | Source | SHA-256 | Observed judge window (UTC) |
+| Arm | Source | Canonical text SHA-256 | Observed judge window (UTC) |
 | --- | --- | --- | --- |
-| Direct generation (GPT-3.5) | `AutoTest/leetcode_summary/3.5_score_readable.json` | `e8e159e806736da7843cf0248a60ef3368152f283b179334e9308ab01be31fef` | 2024-12-08T20:13:53.741Z to 2024-12-08T20:54:17.620Z |
-| Fine-tuned refiner -> GPT-3.5 | `AutoTest/leetcode_summary/finetuned_score_readable.json` | `67525160ccc644de9b78c2d30620daa5c75acdcf5502485853287d8a3bca6ee1` | 2024-12-08T19:31:58.219Z to 2024-12-08T20:12:15.838Z |
-| GPT-4o refiner -> GPT-3.5 | `AutoTest/leetcode_summary/4o_3.5_score_readable.json` | `63d6a9cb1420615bb22a155b163b6778309b0cb98e9fa257f68d651a850b0051` | 2024-12-09T03:08:14.455Z to 2024-12-09T03:48:16.648Z |
+| Direct generation (GPT-3.5) | `AutoTest/leetcode_summary/3.5_score_readable.json` | `67b4ac716874c3e971795fb711215972c47c91f056521cfc3cb448be60830771` | 2024-12-08T20:13:53.741Z to 2024-12-08T20:54:17.620Z |
+| Fine-tuned refiner -> GPT-3.5 | `AutoTest/leetcode_summary/finetuned_score_readable.json` | `4a47e8ff6533a4decc340148cd2b57124a792a23390de3de1b0d45a9b9f29a0e` | 2024-12-08T19:31:58.219Z to 2024-12-08T20:12:15.838Z |
+| GPT-4o refiner -> GPT-3.5 | `AutoTest/leetcode_summary/4o_3.5_score_readable.json` | `989e56315b03f136c259cb95a87a35cc160f7174e014488dab548d5f4c6a808d` | 2024-12-09T03:08:14.455Z to 2024-12-09T03:48:16.648Z |
 
 Derived run IDs bind these labels to the source fingerprints above. Model names are historical labels; the artifacts do not record exact provider snapshots or inference parameters.
+Canonical text fingerprints remove an optional UTF-8 BOM and normalize CRLF or CR newlines to LF before SHA-256; no other content is transformed.
 
 | Arm | Derived run ID | Strategy | Historical generator | Historical refiner | Exact snapshot / parameters |
 | --- | --- | --- | --- | --- | --- |
-| Direct generation (GPT-3.5) | `historical-e8e159e80673` | direct generation | GPT-3.5 | none (direct generation) | not recorded / not recorded |
-| Fine-tuned refiner -> GPT-3.5 | `historical-67525160ccc6` | fine-tuned prompt refinement then generation | GPT-3.5 | fine-tuned GPT-4o | not recorded / not recorded |
-| GPT-4o refiner -> GPT-3.5 | `historical-63d6a9cb1420` | general prompt refinement then generation | GPT-3.5 | GPT-4o | not recorded / not recorded |
+| Direct generation (GPT-3.5) | `historical-67b4ac716874` | direct generation | GPT-3.5 | none (direct generation) | not recorded / not recorded |
+| Fine-tuned refiner -> GPT-3.5 | `historical-4a47e8ff6533` | fine-tuned prompt refinement then generation | GPT-3.5 | fine-tuned GPT-4o | not recorded / not recorded |
+| GPT-4o refiner -> GPT-3.5 | `historical-989e56315b03` | general prompt refinement then generation | GPT-3.5 | GPT-4o | not recorded / not recorded |
 
 ## Limitations
 

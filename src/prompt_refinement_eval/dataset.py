@@ -19,6 +19,12 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
+from prompt_refinement_eval.fingerprints import (
+    CANONICAL_JSON_SHA256_POLICY,
+    CANONICAL_TEXT_SHA256_POLICY,
+    canonical_text_sha256,
+)
+
 IssueSeverity = Literal["error", "warning"]
 
 _ALLOWED_DIFFICULTIES = frozenset({"Easy", "Medium", "Hard"})
@@ -134,6 +140,7 @@ class DatasetValidation:
     dataset: str
     record_count: int
     sha256: str
+    fingerprint_policy: str
     issues: tuple[ValidationIssue, ...]
 
     @property
@@ -155,6 +162,7 @@ class DatasetValidation:
             "dataset": self.dataset,
             "record_count": self.record_count,
             "sha256": self.sha256,
+            "fingerprint_policy": self.fingerprint_policy,
             "is_valid": self.is_valid,
             "error_count": self.error_count,
             "warning_count": self.warning_count,
@@ -356,6 +364,7 @@ def validate_benchmark(cases: Sequence[BenchmarkCase]) -> DatasetValidation:
         dataset="benchmark",
         record_count=len(cases),
         sha256=benchmark_fingerprint(cases),
+        fingerprint_policy=CANONICAL_JSON_SHA256_POLICY,
         issues=tuple(_sorted_issues(issues)),
     )
 
@@ -526,6 +535,7 @@ def validate_fine_tuning(examples: Sequence[FineTuningExample]) -> DatasetValida
         dataset="fine_tuning",
         record_count=len(examples),
         sha256=fine_tuning_fingerprint(examples),
+        fingerprint_policy=CANONICAL_JSON_SHA256_POLICY,
         issues=tuple(_sorted_issues(issues)),
     )
 
@@ -547,7 +557,7 @@ def validate_train_benchmark_overlaps(
         manifest_bytes = manifest_path.read_bytes()
     except OSError:
         raise
-    manifest_sha256 = hashlib.sha256(manifest_bytes).hexdigest()
+    manifest_sha256 = canonical_text_sha256(manifest_bytes)
     try:
         raw_manifest: object = json.loads(manifest_bytes)
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
@@ -556,6 +566,7 @@ def validate_train_benchmark_overlaps(
             dataset="train_benchmark_overlap",
             record_count=0,
             sha256=manifest_sha256,
+            fingerprint_policy=CANONICAL_TEXT_SHA256_POLICY,
             issues=tuple(_sorted_issues(issues)),
         )
     if not isinstance(raw_manifest, dict):
@@ -564,6 +575,7 @@ def validate_train_benchmark_overlaps(
             dataset="train_benchmark_overlap",
             record_count=0,
             sha256=manifest_sha256,
+            fingerprint_policy=CANONICAL_TEXT_SHA256_POLICY,
             issues=tuple(_sorted_issues(issues)),
         )
 
@@ -692,6 +704,7 @@ def validate_train_benchmark_overlaps(
         dataset="train_benchmark_overlap",
         record_count=len(confirmed),
         sha256=manifest_sha256,
+        fingerprint_policy=CANONICAL_TEXT_SHA256_POLICY,
         issues=tuple(_sorted_issues(issues)),
     )
 

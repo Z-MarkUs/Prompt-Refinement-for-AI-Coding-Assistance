@@ -35,7 +35,8 @@ nor performs network activity.
    even when the historical data returns a non-zero validation status.
 2. Load the result artifacts and check their structure, status values, and declared
    counts independently of the dataset audit.
-3. Fingerprint the evaluated inputs so a report can identify its evidence exactly.
+3. Fingerprint the evaluated inputs under explicit canonical-JSON or canonical-text
+   policies so reports remain stable across line-ending conventions.
 4. Join arms by task ID. Preserve every arm's observed denominator and missing IDs.
 5. Compute complete-case and pairwise summaries on explicit intersections.
 6. Serialize derived results deterministically, then render explanatory documentation

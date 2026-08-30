@@ -15,6 +15,11 @@ from pathlib import Path
 
 from prompt_refinement_eval import __version__
 from prompt_refinement_eval.dataset import DatasetValidation
+from prompt_refinement_eval.fingerprints import (
+    CANONICAL_JSON_SHA256_POLICY,
+    CANONICAL_TEXT_SHA256_POLICY,
+    canonical_text_sha256,
+)
 
 _SENSITIVITY_ISSUE_CODES = frozenset({"benchmark.signature_description_mismatch"})
 _EMPTY_IDS: frozenset[int] = frozenset()
@@ -126,6 +131,7 @@ class ArmSummary:
             "name": self.name,
             "source": self.source,
             "source_sha256": self.source_sha256,
+            "source_sha256_policy": CANONICAL_TEXT_SHA256_POLICY,
             "declared_total": self.declared_total,
             "declared_success": self.declared_success,
             "declared_failed": self.declared_failed,
@@ -264,17 +270,20 @@ class BenchmarkAuditSummary:
             "source": self.source,
             "record_count": self.record_count,
             "sha256": self.sha256,
+            "sha256_policy": CANONICAL_JSON_SHA256_POLICY,
             "is_valid": self.is_valid,
             "error_count": self.error_count,
             "warning_count": self.warning_count,
             "issue_codes": list(self.issue_codes),
             "validation_summary_sha256": self.validation_summary_sha256,
+            "validation_summary_sha256_policy": CANONICAL_JSON_SHA256_POLICY,
             "task_ids": list(self.task_ids),
             "flagged_task_ids": list(self.flagged_task_ids),
             "sensitivity_excluded_task_ids": list(self.sensitivity_excluded_task_ids),
             "correction_manifest": {
                 "source": self.correction_manifest_source,
                 "sha256": self.correction_manifest_sha256,
+                "sha256_policy": CANONICAL_TEXT_SHA256_POLICY,
             },
         }
 
@@ -318,6 +327,7 @@ class OverlapRiskAuditSummary:
         return {
             "source": self.source,
             "manifest_sha256": self.manifest_sha256,
+            "manifest_sha256_policy": CANONICAL_TEXT_SHA256_POLICY,
             "is_valid": self.is_valid,
             "error_count": self.error_count,
             "warning_count": self.warning_count,
@@ -366,7 +376,7 @@ class AnalysisReport:
 
     def to_dict(self) -> dict[str, object]:
         return {
-            "schema_version": "1.2",
+            "schema_version": "1.3",
             "analysis": "historical paired correctness comparison",
             "analyzer": {
                 "package": "prompt-refinement-eval",
@@ -377,12 +387,23 @@ class AnalysisReport:
                     "complete_case_rule": "exact task-ID intersection",
                     "paired_test": "two-sided exact McNemar (binomial)",
                     "multiple_comparison_adjustment": "none",
+                    "fingerprint_policies": {
+                        CANONICAL_JSON_SHA256_POLICY: (
+                            "JSON sorted by key with compact separators, encoded as UTF-8, "
+                            "then hashed with SHA-256"
+                        ),
+                        CANONICAL_TEXT_SHA256_POLICY: (
+                            "UTF-8 text with an optional BOM removed and CRLF or CR newlines "
+                            "normalized to LF, then hashed with SHA-256"
+                        ),
+                    },
                 },
             },
             "task_union": {
                 "task_count": len(self.task_union_ids),
                 "task_ids": list(self.task_union_ids),
                 "sha256": self.task_union_sha256,
+                "sha256_policy": CANONICAL_JSON_SHA256_POLICY,
             },
             "arms": {arm.name: arm.to_dict() for arm in self.arms},
             "complete_cases": self.complete_cases.to_dict(),
@@ -442,7 +463,7 @@ def benchmark_audit_from_validation(
         if correction_value.get("source_content_sha256") != validation.sha256:
             raise ValueError("correction manifest does not match the benchmark fingerprint")
         correction_source = correction_manifest.as_posix()
-        correction_sha256 = hashlib.sha256(correction_bytes).hexdigest()
+        correction_sha256 = canonical_text_sha256(correction_bytes)
     return BenchmarkAuditSummary(
         source=source.as_posix(),
         record_count=validation.record_count,
@@ -554,7 +575,7 @@ def load_historical_result(path: Path, name: str | None = None) -> HistoricalArm
     return HistoricalArm(
         name=arm_name,
         source=path,
-        source_sha256=hashlib.sha256(raw_bytes).hexdigest(),
+        source_sha256=canonical_text_sha256(raw_bytes),
         records=records,
         declared_total=declared_total,
         declared_success=declared_success,

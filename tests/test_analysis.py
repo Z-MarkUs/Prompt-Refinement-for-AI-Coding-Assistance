@@ -121,6 +121,52 @@ def test_loader_records_declared_count_and_missing_status_issues(tmp_path: Path)
     assert len(arm.source_sha256) == 64
 
 
+def test_result_and_manifest_fingerprints_ignore_checkout_newlines(tmp_path: Path) -> None:
+    result_payload = json.dumps(
+        {
+            "total": 1,
+            "success": 1,
+            "failed": 0,
+            "detail": {"1": {"status_msg": "Accepted"}},
+        },
+        indent=2,
+    )
+    result_lf = tmp_path / "result-lf.json"
+    result_crlf = tmp_path / "result-crlf.json"
+    result_lf.write_bytes(f"{result_payload}\n".encode())
+    result_crlf.write_bytes(b"\xef\xbb\xbf" + f"{result_payload}\n".replace("\n", "\r\n").encode())
+
+    assert (
+        load_historical_result(result_lf).source_sha256
+        == load_historical_result(result_crlf).source_sha256
+    )
+
+    cases = load_benchmark(PROJECT_ROOT / "AutoTest" / "test.csv")
+    validation = validate_benchmark(cases)
+    source_manifest = (
+        PROJECT_ROOT / "data" / "curated" / "benchmark_corrections.json"
+    ).read_bytes()
+    canonical_manifest = source_manifest.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    manifest_lf = tmp_path / "corrections-lf.json"
+    manifest_crlf = tmp_path / "corrections-crlf.json"
+    manifest_lf.write_bytes(canonical_manifest)
+    manifest_crlf.write_bytes(canonical_manifest.replace(b"\n", b"\r\n"))
+
+    audit_lf = benchmark_audit_from_validation(
+        validation,
+        source=PROJECT_ROOT / "AutoTest" / "test.csv",
+        task_ids=[case.task_id for case in cases],
+        correction_manifest=manifest_lf,
+    )
+    audit_crlf = benchmark_audit_from_validation(
+        validation,
+        source=PROJECT_ROOT / "AutoTest" / "test.csv",
+        task_ids=[case.task_id for case in cases],
+        correction_manifest=manifest_crlf,
+    )
+    assert audit_lf.correction_manifest_sha256 == audit_crlf.correction_manifest_sha256
+
+
 @pytest.mark.parametrize(
     "payload",
     ["[]", '{"detail": []}', '{"detail": {"not-an-id": {}}}'],
@@ -171,7 +217,8 @@ def test_write_report_json_round_trips_serializable_report(tmp_path: Path) -> No
     write_report_json(report, output)
     saved = json.loads(output.read_text(encoding="utf-8"))
 
-    assert saved["schema_version"] == "1.2"
+    assert saved["schema_version"] == "1.3"
+    assert saved["arms"]["first"]["source_sha256_policy"].endswith("sha256-v1")
     assert saved["task_union"]["task_count"] == 1
     assert saved["pairwise"][0]["mcnemar"]["p_value"] == 1.0
     archival = saved["arms"]["first"]["archival_run"]

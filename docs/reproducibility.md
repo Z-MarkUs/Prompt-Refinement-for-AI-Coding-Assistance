@@ -43,6 +43,9 @@ The benchmark is the 200-record `AutoTest/test.csv` export. The three result inp
 The labels describe the historical repository convention; they do not claim that these
 artifacts measure current model versions. Keep the raw files unchanged. Record the Git
 revision and the SHA-256 values emitted by the analysis in any derived report.
+For text artifacts, the emitted source fingerprint removes an optional UTF-8 BOM and
+normalizes CRLF or CR newlines to LF before SHA-256; no other content is transformed.
+The policy identifier is included beside each digest in the generated JSON.
 
 ## Audit the raw datasets
 

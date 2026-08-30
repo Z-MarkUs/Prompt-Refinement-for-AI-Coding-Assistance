@@ -106,7 +106,8 @@ def render_markdown(report: AnalysisReport) -> str:
                 [
                     "",
                     (
-                        f"Correction manifest: `{_cell(audit.correction_manifest_source)}` "
+                        "Correction manifest newline-canonical content fingerprint: "
+                        f"`{_cell(audit.correction_manifest_source)}` "
                         f"(`{audit.correction_manifest_sha256}`)"
                     ),
                 ]
@@ -188,7 +189,8 @@ def render_markdown(report: AnalysisReport) -> str:
                 ),
                 "",
                 (
-                    f"Overlap manifest: `{_cell(overlap_audit.source)}` "
+                    "Overlap manifest newline-canonical content fingerprint: "
+                    f"`{_cell(overlap_audit.source)}` "
                     f"(`{overlap_audit.manifest_sha256}`)"
                 ),
                 "",
@@ -232,7 +234,7 @@ def render_markdown(report: AnalysisReport) -> str:
             "",
             f"Task-union fingerprint: `{report.task_union_sha256}`",
             "",
-            "| Arm | Source | SHA-256 | Observed judge window (UTC) |",
+            "| Arm | Source | Canonical text SHA-256 | Observed judge window (UTC) |",
             "| --- | --- | --- | --- |",
         ]
     )
@@ -254,6 +256,10 @@ def render_markdown(report: AnalysisReport) -> str:
                 "Derived run IDs bind these labels to the source fingerprints above. Model "
                 "names are historical labels; the artifacts do not record exact provider "
                 "snapshots or inference parameters."
+            ),
+            (
+                "Canonical text fingerprints remove an optional UTF-8 BOM and normalize CRLF "
+                "or CR newlines to LF before SHA-256; no other content is transformed."
             ),
             "",
             (
