@@ -28,11 +28,11 @@ classifiers = [
 dependencies = []
 
 [project.optional-dependencies]
-openai = ["openai>=1.68,<3"]
+openai = ["openai>=1.68,<4"]
 dev = [
   "build>=1.2,<2",
   "mypy>=1.13,<2",
-  "openai>=1.68,<3",
+  "openai>=1.68,<4",
   "pip-audit>=2.10,<3",
   "pytest>=9.0.3,<10",
   "pytest-cov>=6,<8",
