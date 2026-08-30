@@ -11,9 +11,15 @@ from prompt_refinement_eval.analysis import (
     benchmark_audit_from_validation,
     exact_mcnemar_p_value,
     load_historical_result,
+    overlap_risk_audit_from_validation,
     write_report_json,
 )
-from prompt_refinement_eval.dataset import load_benchmark, validate_benchmark
+from prompt_refinement_eval.dataset import (
+    load_benchmark,
+    load_jsonl,
+    validate_benchmark,
+    validate_train_benchmark_overlaps,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
@@ -165,7 +171,7 @@ def test_write_report_json_round_trips_serializable_report(tmp_path: Path) -> No
     write_report_json(report, output)
     saved = json.loads(output.read_text(encoding="utf-8"))
 
-    assert saved["schema_version"] == "1.1"
+    assert saved["schema_version"] == "1.2"
     assert saved["task_union"]["task_count"] == 1
     assert saved["pairwise"][0]["mcnemar"]["p_value"] == 1.0
     archival = saved["arms"]["first"]["archival_run"]
@@ -185,6 +191,16 @@ def test_repository_historical_results_are_reproduced_from_raw_artifacts() -> No
         source=benchmark_path,
         task_ids=[case.task_id for case in benchmark_cases],
     )
+    overlap_path = PROJECT_ROOT / "data" / "curated" / "train_benchmark_overlaps.json"
+    overlap_validation = validate_train_benchmark_overlaps(
+        benchmark_cases,
+        load_jsonl(PROJECT_ROOT / "Model Fine-Tuning" / "train.jsonl"),
+        overlap_path,
+    )
+    overlap_audit = overlap_risk_audit_from_validation(
+        overlap_validation,
+        source=overlap_path,
+    )
     report = analyze_historical_results(
         {
             "baseline_gpt35": summary / "3.5_score_readable.json",
@@ -192,6 +208,7 @@ def test_repository_historical_results_are_reproduced_from_raw_artifacts() -> No
             "gpt4o_refiner_gpt35": summary / "4o_3.5_score_readable.json",
         },
         benchmark_audit=benchmark_audit,
+        overlap_risk_audit=overlap_audit,
     )
     arms = {arm.name: arm for arm in report.arms}
 
@@ -214,4 +231,19 @@ def test_repository_historical_results_are_reproduced_from_raw_artifacts() -> No
     assert report.sensitivity is not None
     assert report.sensitivity.excluded_task_ids == (1003, 1564, 1672)
     assert len(report.sensitivity.complete_case_ids) == 190
+    assert report.overlap_risk_audit is not None
+    assert report.overlap_risk_audit.confirmed_task_ids == (1009, 1038)
+    assert report.overlap_risk_sensitivity is not None
+    overlap_pair = next(
+        comparison
+        for comparison in report.overlap_risk_sensitivity.pairwise
+        if comparison.arm_a == "baseline_gpt35" and comparison.arm_b == "finetuned_refiner_gpt35"
+    )
+    assert overlap_pair.paired_count == 192
+    assert overlap_pair.arm_a_accepted == 130
+    assert overlap_pair.arm_b_accepted == 123
+    assert overlap_pair.a_only_accepted == 23
+    assert overlap_pair.b_only_accepted == 16
+    assert overlap_pair.acceptance_rate_difference_b_minus_a == pytest.approx(-7 / 192)
+    assert overlap_pair.mcnemar_exact_p_value == pytest.approx(0.3367836351899314)
     assert not report.issues

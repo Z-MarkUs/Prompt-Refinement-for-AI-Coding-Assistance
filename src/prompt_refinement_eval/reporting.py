@@ -171,6 +171,60 @@ def render_markdown(report: AnalysisReport) -> str:
                     f"{_p_value(comparison.mcnemar_exact_p_value)} |"
                 )
 
+    if report.overlap_risk_audit is not None and report.overlap_risk_sensitivity is not None:
+        overlap_audit = report.overlap_risk_audit
+        overlap_sensitivity = report.overlap_risk_sensitivity
+        excluded = ", ".join(map(str, overlap_sensitivity.excluded_task_ids))
+        lines.extend(
+            [
+                "",
+                "## Training/benchmark overlap risk",
+                "",
+                (
+                    "A hash-bound review confirms equivalent task variants in the retained "
+                    f"training export for benchmark IDs {excluded}. The exact binding between "
+                    "that export and the evaluated fine-tuned model is not recorded, so this "
+                    "is a leakage-risk sensitivity—not proof of model contamination."
+                ),
+                "",
+                (
+                    f"Overlap manifest: `{_cell(overlap_audit.source)}` "
+                    f"(`{overlap_audit.manifest_sha256}`)"
+                ),
+                "",
+                (
+                    f"All arms share {len(overlap_sensitivity.complete_case_ids)} tasks after "
+                    "excluding the confirmed variants."
+                ),
+                "",
+                "| Arm | Accepted | Shared tasks | Acceptance |",
+                "| --- | ---: | ---: | ---: |",
+            ]
+        )
+        for complete_arm in overlap_sensitivity.complete_case_arms:
+            lines.append(
+                f"| {_cell(_arm_label(complete_arm.name))} | {complete_arm.accepted} | "
+                f"{complete_arm.accepted + complete_arm.failed} | "
+                f"{_percentage(complete_arm.acceptance_rate)} |"
+            )
+        lines.extend(
+            [
+                "",
+                "| Arm A | Arm B | Paired n | A only | B only | Difference | Exact p |",
+                "| --- | --- | ---: | ---: | ---: | ---: | ---: |",
+            ]
+        )
+        for comparison in overlap_sensitivity.pairwise:
+            lines.append(
+                "| "
+                f"{_cell(_arm_label(comparison.arm_a))} | "
+                f"{_cell(_arm_label(comparison.arm_b))} | "
+                f"{comparison.paired_count} | {comparison.a_only_accepted} | "
+                f"{comparison.b_only_accepted} | "
+                f"{_percentage_points(comparison.acceptance_rate_difference_b_minus_a)} | "
+                f"{_p_value(comparison.mcnemar_exact_p_value)} |"
+            )
+
     lines.extend(
         [
             "",

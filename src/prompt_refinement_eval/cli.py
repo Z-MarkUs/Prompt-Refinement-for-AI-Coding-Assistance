@@ -14,6 +14,7 @@ from prompt_refinement_eval.analysis import (
     ResultFormatError,
     analyze_historical_results,
     benchmark_audit_from_validation,
+    overlap_risk_audit_from_validation,
     write_report_json,
 )
 from prompt_refinement_eval.dataset import (
@@ -231,6 +232,7 @@ def _analysis_from_args(args: argparse.Namespace) -> AnalysisReport:
     if benchmark_path is None and args.arm is None and DEFAULT_BENCHMARK.is_file():
         benchmark_path = DEFAULT_BENCHMARK
     benchmark_audit = None
+    overlap_risk_audit = None
     if benchmark_path is not None:
         benchmark_cases = load_benchmark(benchmark_path)
         validation = validate_benchmark(benchmark_cases)
@@ -247,9 +249,25 @@ def _analysis_from_args(args: argparse.Namespace) -> AnalysisReport:
             task_ids=[case.task_id for case in benchmark_cases],
             correction_manifest=correction_manifest,
         )
+        if (
+            args.arm is None
+            and benchmark_path == DEFAULT_BENCHMARK
+            and DEFAULT_TRAIN.is_file()
+            and DEFAULT_OVERLAP_MANIFEST.is_file()
+        ):
+            overlap_validation = validate_train_benchmark_overlaps(
+                benchmark_cases,
+                load_jsonl(DEFAULT_TRAIN),
+                DEFAULT_OVERLAP_MANIFEST,
+            )
+            overlap_risk_audit = overlap_risk_audit_from_validation(
+                overlap_validation,
+                source=DEFAULT_OVERLAP_MANIFEST,
+            )
     return analyze_historical_results(
         _arm_paths(args.arm),
         benchmark_audit=benchmark_audit,
+        overlap_risk_audit=overlap_risk_audit,
     )
 
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from prompt_refinement_eval.analysis import analyze_historical_results
+from prompt_refinement_eval.analysis import OverlapRiskAuditSummary, analyze_historical_results
 from prompt_refinement_eval.reporting import render_markdown
 
 
@@ -30,7 +30,15 @@ def test_markdown_report_keeps_negative_result_and_provenance_visible(tmp_path: 
     _write_arm(baseline, {1: "Accepted", 2: "Accepted", 3: "Wrong Answer"})
     _write_arm(refined, {1: "Accepted", 2: "Wrong Answer", 3: "Wrong Answer"})
     report = analyze_historical_results(
-        {"baseline_gpt35": baseline, "finetuned_refiner_gpt35": refined}
+        {"baseline_gpt35": baseline, "finetuned_refiner_gpt35": refined},
+        overlap_risk_audit=OverlapRiskAuditSummary(
+            source="data/curated/overlaps.json",
+            manifest_sha256="a" * 64,
+            is_valid=True,
+            error_count=0,
+            warning_count=1,
+            confirmed_task_ids=(2,),
+        ),
     )
 
     markdown = render_markdown(report)
@@ -49,6 +57,9 @@ def test_markdown_report_keeps_negative_result_and_provenance_visible(tmp_path: 
     assert "not recorded / not recorded" in markdown
     assert "exact provider snapshots or inference parameters" in markdown
     assert "or training-artifact hashes" in markdown
+    assert "## Training/benchmark overlap risk" in markdown
+    assert "data/curated/overlaps.json" in markdown
+    assert "not proof of model contamination" in markdown
 
 
 def test_markdown_report_uses_neutral_finding_without_named_baseline(tmp_path: Path) -> None:

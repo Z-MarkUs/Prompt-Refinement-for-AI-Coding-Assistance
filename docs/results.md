@@ -61,6 +61,26 @@ All arms share 190 tasks after those exclusions.
 | Direct generation (GPT-3.5) | GPT-4o refiner -> GPT-3.5 | 193 | 84 | 5 | -40.93 pp | 1.42e-19 |
 | Fine-tuned refiner -> GPT-3.5 | GPT-4o refiner -> GPT-3.5 | 192 | 79 | 9 | -36.46 pp | 4.15e-15 |
 
+## Training/benchmark overlap risk
+
+A hash-bound review confirms equivalent task variants in the retained training export for benchmark IDs 1009, 1038. The exact binding between that export and the evaluated fine-tuned model is not recorded, so this is a leakage-risk sensitivity—not proof of model contamination.
+
+Overlap manifest: `data/curated/train_benchmark_overlaps.json` (`18175a7ab1404cec9ecd17880a0fd665348141481b253bb70e60fec1dcf4dda4`)
+
+All arms share 191 tasks after excluding the confirmed variants.
+
+| Arm | Accepted | Shared tasks | Acceptance |
+| --- | ---: | ---: | ---: |
+| Direct generation (GPT-3.5) | 129 | 191 | 67.54% |
+| Fine-tuned refiner -> GPT-3.5 | 122 | 191 | 63.87% |
+| GPT-4o refiner -> GPT-3.5 | 52 | 191 | 27.23% |
+
+| Arm A | Arm B | Paired n | A only | B only | Difference | Exact p |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Direct generation (GPT-3.5) | Fine-tuned refiner -> GPT-3.5 | 192 | 23 | 16 | -3.65 pp | 0.3368 |
+| Direct generation (GPT-3.5) | GPT-4o refiner -> GPT-3.5 | 194 | 84 | 5 | -40.72 pp | 1.42e-19 |
+| Fine-tuned refiner -> GPT-3.5 | GPT-4o refiner -> GPT-3.5 | 193 | 78 | 9 | -35.75 pp | 7.47e-15 |
+
 ## Provenance
 
 Task-union fingerprint: `bcfa75f8eecdc322a41b17be16c8537f3d72db4ce028ec30f652c3f5b3ae22ec`

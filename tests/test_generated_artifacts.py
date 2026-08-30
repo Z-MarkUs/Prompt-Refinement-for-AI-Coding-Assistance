@@ -96,6 +96,19 @@ def test_readme_and_site_metrics_match_generated_analysis() -> None:
     assert "0.4177" in readme
     assert "0.4177" in site
 
+    overlap_sensitivity = next(
+        item
+        for item in analysis["overlap_risk_sensitivity_analysis"]["pairwise"]
+        if item["arm_a"] == "baseline_gpt35" and item["arm_b"] == "finetuned_refiner_gpt35"
+    )
+    assert analysis["overlap_risk_audit"]["confirmed_task_ids"] == [1009, 1038]
+    assert overlap_sensitivity["paired_count"] == 192
+    assert overlap_sensitivity["arm_a_accepted"] == 130
+    assert overlap_sensitivity["arm_b_accepted"] == 123
+    assert overlap_sensitivity["contingency"]["a_only_accepted"] == 23
+    assert overlap_sensitivity["contingency"]["b_only_accepted"] == 16
+    assert overlap_sensitivity["mcnemar"]["p_value"] == pytest.approx(0.3367836351899314)
+
 
 def test_readme_local_links_resolve() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")

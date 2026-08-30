@@ -100,8 +100,9 @@ structurally usable. Declared-count discrepancies, if present, are preserved in 
 report's `issues` array rather than silently corrected. The JSON report contains source
 hashes, the benchmark-validation and correction-manifest fingerprints, the 200-ID union,
 each missing-ID set, the 193-task complete-case set, observed judge windows, every exact
-pairwise comparison, and an identity-conflict sensitivity analysis. Generated totals in
-`docs/results.md` should be regenerated with the CLI, not hand-edited.
+pairwise comparison, an identity-conflict sensitivity analysis, and the hash-bound
+training/benchmark overlap-risk sensitivity. Generated totals in `docs/results.md` should
+be regenerated with the CLI, not hand-edited.
 
 ## Expected descriptive results
 

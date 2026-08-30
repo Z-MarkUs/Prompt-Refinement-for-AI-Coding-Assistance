@@ -281,8 +281,9 @@ class BenchmarkAuditSummary:
 
 @dataclass(frozen=True, slots=True)
 class SensitivitySummary:
-    """Paired results after excluding task IDs with identity-level findings."""
+    """Paired results after excluding task IDs for a documented audit reason."""
 
+    reason: str
     excluded_task_ids: tuple[int, ...]
     retained_union_ids: tuple[int, ...]
     complete_case_ids: tuple[int, ...]
@@ -291,7 +292,7 @@ class SensitivitySummary:
 
     def to_dict(self) -> dict[str, object]:
         return {
-            "reason": "exclude benchmark tasks with identity-level validation findings",
+            "reason": self.reason,
             "excluded_task_ids": list(self.excluded_task_ids),
             "retained_union_count": len(self.retained_union_ids),
             "retained_union_ids": list(self.retained_union_ids),
@@ -299,6 +300,36 @@ class SensitivitySummary:
             "complete_case_ids": list(self.complete_case_ids),
             "complete_case_arms": {arm.name: arm.to_dict() for arm in self.complete_case_arms},
             "pairwise": [comparison.to_dict() for comparison in self.pairwise],
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class OverlapRiskAuditSummary:
+    """Hash-bound cross-dataset findings used for leakage-risk sensitivity."""
+
+    source: str
+    manifest_sha256: str
+    is_valid: bool
+    error_count: int
+    warning_count: int
+    confirmed_task_ids: tuple[int, ...]
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "source": self.source,
+            "manifest_sha256": self.manifest_sha256,
+            "is_valid": self.is_valid,
+            "error_count": self.error_count,
+            "warning_count": self.warning_count,
+            "confirmed_task_ids": list(self.confirmed_task_ids),
+            "historical_model_binding": {
+                "recorded": False,
+                "value": None,
+                "note": (
+                    "the repository does not bind this exact training export to the "
+                    "evaluated fine-tuned model"
+                ),
+            },
         }
 
 
@@ -330,10 +361,12 @@ class AnalysisReport:
     benchmark_audit: BenchmarkAuditSummary | None = None
     benchmark_alignment: BenchmarkAlignmentSummary | None = None
     sensitivity: SensitivitySummary | None = None
+    overlap_risk_audit: OverlapRiskAuditSummary | None = None
+    overlap_risk_sensitivity: SensitivitySummary | None = None
 
     def to_dict(self) -> dict[str, object]:
         return {
-            "schema_version": "1.1",
+            "schema_version": "1.2",
             "analysis": "historical paired correctness comparison",
             "analyzer": {
                 "package": "prompt-refinement-eval",
@@ -362,6 +395,14 @@ class AnalysisReport:
             ),
             "sensitivity_analysis": (
                 None if self.sensitivity is None else self.sensitivity.to_dict()
+            ),
+            "overlap_risk_audit": (
+                None if self.overlap_risk_audit is None else self.overlap_risk_audit.to_dict()
+            ),
+            "overlap_risk_sensitivity_analysis": (
+                None
+                if self.overlap_risk_sensitivity is None
+                else self.overlap_risk_sensitivity.to_dict()
             ),
             "issues": [issue.to_dict() for issue in self.issues],
         }
@@ -416,6 +457,31 @@ def benchmark_audit_from_validation(
         sensitivity_excluded_task_ids=tuple(sensitivity_ids),
         correction_manifest_source=correction_source,
         correction_manifest_sha256=correction_sha256,
+    )
+
+
+def overlap_risk_audit_from_validation(
+    validation: DatasetValidation,
+    *,
+    source: Path,
+) -> OverlapRiskAuditSummary:
+    """Convert a verified overlap manifest audit into analysis provenance."""
+
+    confirmed_ids = sorted(
+        {
+            task_id
+            for issue in validation.issues
+            if issue.code == "cross_dataset.confirmed_task_overlap"
+            for task_id in issue.record_ids
+        }
+    )
+    return OverlapRiskAuditSummary(
+        source=source.as_posix(),
+        manifest_sha256=validation.sha256,
+        is_valid=validation.is_valid,
+        error_count=validation.error_count,
+        warning_count=validation.warning_count,
+        confirmed_task_ids=tuple(confirmed_ids),
     )
 
 
@@ -501,6 +567,7 @@ def analyze_historical_results(
     result_paths: Mapping[str, Path],
     *,
     benchmark_audit: BenchmarkAuditSummary | None = None,
+    overlap_risk_audit: OverlapRiskAuditSummary | None = None,
 ) -> AnalysisReport:
     """Load result arms and compare correctness on ID-keyed paired intersections."""
 
@@ -526,6 +593,13 @@ def analyze_historical_results(
         if benchmark_alignment.result_only_ids:
             unexpected = ", ".join(map(str, benchmark_alignment.result_only_ids))
             raise ValueError(f"result task IDs are absent from the benchmark: {unexpected}")
+    if overlap_risk_audit is not None:
+        if not overlap_risk_audit.is_valid:
+            raise ValueError("train/benchmark overlap manifest validation failed")
+        unexpected_overlap_ids = set(overlap_risk_audit.confirmed_task_ids) - task_union_set
+        if unexpected_overlap_ids:
+            unexpected = ", ".join(map(str, sorted(unexpected_overlap_ids)))
+            raise ValueError(f"overlap task IDs are absent from the result union: {unexpected}")
 
     summaries: list[ArmSummary] = []
     complete_arms: list[CompleteCaseArm] = []
@@ -572,29 +646,22 @@ def analyze_historical_results(
     pairwise = tuple(_compare_pair(arm_a, arm_b) for arm_a, arm_b in combinations(arms, 2))
     sensitivity: SensitivitySummary | None = None
     if benchmark_audit is not None and benchmark_audit.sensitivity_excluded_task_ids:
-        excluded = frozenset(benchmark_audit.sensitivity_excluded_task_ids)
-        sensitivity_complete_ids = tuple(
-            task_id for task_id in complete_ids if task_id not in excluded
-        )
-        sensitivity_complete_arms: list[CompleteCaseArm] = []
-        for arm in arms:
-            accepted = sum(arm.records[task_id].accepted for task_id in sensitivity_complete_ids)
-            sensitivity_complete_arms.append(
-                CompleteCaseArm(
-                    name=arm.name,
-                    accepted=accepted,
-                    failed=len(sensitivity_complete_ids) - accepted,
-                    acceptance_rate=_rate(accepted, len(sensitivity_complete_ids)),
-                )
-            )
-        sensitivity = SensitivitySummary(
+        sensitivity = _build_sensitivity_summary(
+            arms,
+            task_union,
+            complete_ids,
             excluded_task_ids=benchmark_audit.sensitivity_excluded_task_ids,
-            retained_union_ids=tuple(task_id for task_id in task_union if task_id not in excluded),
-            complete_case_ids=sensitivity_complete_ids,
-            complete_case_arms=tuple(sensitivity_complete_arms),
-            pairwise=tuple(
-                _compare_pair(arm_a, arm_b, excluded_ids=excluded)
-                for arm_a, arm_b in combinations(arms, 2)
+            reason="exclude benchmark tasks with identity-level validation findings",
+        )
+    overlap_risk_sensitivity: SensitivitySummary | None = None
+    if overlap_risk_audit is not None and overlap_risk_audit.confirmed_task_ids:
+        overlap_risk_sensitivity = _build_sensitivity_summary(
+            arms,
+            task_union,
+            complete_ids,
+            excluded_task_ids=overlap_risk_audit.confirmed_task_ids,
+            reason=(
+                "exclude benchmark tasks with equivalent variants in the retained training export"
             ),
         )
     all_issues = tuple(issue for arm in arms for issue in arm.issues)
@@ -611,6 +678,42 @@ def analyze_historical_results(
         benchmark_audit=benchmark_audit,
         benchmark_alignment=benchmark_alignment,
         sensitivity=sensitivity,
+        overlap_risk_audit=overlap_risk_audit,
+        overlap_risk_sensitivity=overlap_risk_sensitivity,
+    )
+
+
+def _build_sensitivity_summary(
+    arms: Sequence[HistoricalArm],
+    task_union: tuple[int, ...],
+    complete_ids: tuple[int, ...],
+    *,
+    excluded_task_ids: tuple[int, ...],
+    reason: str,
+) -> SensitivitySummary:
+    excluded = frozenset(excluded_task_ids)
+    sensitivity_complete_ids = tuple(task_id for task_id in complete_ids if task_id not in excluded)
+    sensitivity_complete_arms: list[CompleteCaseArm] = []
+    for arm in arms:
+        accepted = sum(arm.records[task_id].accepted for task_id in sensitivity_complete_ids)
+        sensitivity_complete_arms.append(
+            CompleteCaseArm(
+                name=arm.name,
+                accepted=accepted,
+                failed=len(sensitivity_complete_ids) - accepted,
+                acceptance_rate=_rate(accepted, len(sensitivity_complete_ids)),
+            )
+        )
+    return SensitivitySummary(
+        reason=reason,
+        excluded_task_ids=excluded_task_ids,
+        retained_union_ids=tuple(task_id for task_id in task_union if task_id not in excluded),
+        complete_case_ids=sensitivity_complete_ids,
+        complete_case_arms=tuple(sensitivity_complete_arms),
+        pairwise=tuple(
+            _compare_pair(arm_a, arm_b, excluded_ids=excluded)
+            for arm_a, arm_b in combinations(arms, 2)
+        ),
     )
 
 
