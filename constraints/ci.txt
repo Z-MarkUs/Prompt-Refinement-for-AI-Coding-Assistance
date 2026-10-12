@@ -9,4 +9,4 @@ pip-audit==2.10.1
 pytest==9.1.1
 pytest-cov==7.1.0
 ruff==0.16.9
-tomli==2.4.1; python_version < "3.11"
+tomli==2.5.0; python_version < "3.11"
