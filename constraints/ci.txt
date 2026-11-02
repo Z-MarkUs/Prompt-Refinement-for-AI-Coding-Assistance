@@ -6,7 +6,7 @@ mypy==2.3.1
 openai==3.19.2
 pip==26.2.1
 pip-audit==2.10.1
-pytest==9.1.1
+pytest==9.2.0
 pytest-cov==7.1.0
 ruff==0.16.9
 tomli==2.4.1; python_version < "3.11"
